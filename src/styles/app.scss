@@ -1,0 +1,18 @@
+@import "./libs/normalize";
+@import "./libs/variables";
+
+body {
+  background-color: $bgColor;
+  color: $whiteColor;
+}
+
+.container {
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.Mui-selected {
+  border: 1px solid $mainColor !important;
+  background-color: rgba(53, 167, 112, 0.225) !important;
+}
