@@ -1,7 +1,6 @@
 import styles from "./AsideBar.module.scss";
-import { IoHome, IoStatsChart } from "react-icons/io5";
-import { AiFillCreditCard } from "react-icons/ai";
-import { MdMarkEmailUnread } from "react-icons/md";
+
+import { menuList } from "../../utils/constants/menuList";
 
 export const AsideBar = () => {
   return (
@@ -15,38 +14,14 @@ export const AsideBar = () => {
         <hr className={styles.divider}></hr>
 
         <ul className={styles.menuList}>
-          <li className={styles.menuItem}>
-            <div className={styles.itemIcon}>
-              <IoHome />
-            </div>
-            <div className={styles.itemText}>
-              <span>Главная</span>
-            </div>
-          </li>
-          <li className={styles.menuItem}>
-            <div className={styles.itemIcon}>
-              <IoStatsChart />
-            </div>
-            <div className={styles.itemText}>
-              <span>Статистика</span>
-            </div>
-          </li>
-          <li className={styles.menuItem}>
-            <div className={styles.itemIcon}>
-              <AiFillCreditCard />
-            </div>
-            <div className={styles.itemText}>
-              <span>Посты</span>
-            </div>
-          </li>
-          <li className={styles.menuItem}>
-            <div className={styles.itemIcon}>
-              <MdMarkEmailUnread />
-            </div>
-            <div className={styles.itemText}>
-              <span>Подписчики</span>
-            </div>
-          </li>
+          {menuList.map((item, index) => (
+            <li key={index} className={styles.menuItem}>
+              <div className={styles.itemIcon}>{item.icon}</div>
+              <div className={styles.itemText}>
+                <span>{item.title}</span>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </aside>
