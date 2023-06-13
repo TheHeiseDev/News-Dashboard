@@ -1,8 +1,15 @@
 import React from "react";
-import "./App.css";
+import "./styles/app.scss";
+import { MainLayout } from "./layouts/MainLayout";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <MainLayout>
+      <div style={{ height: "1000px" }}>
+        <h1>Главная</h1>
+      </div>
+    </MainLayout>
+  );
 }
 
 export default App;
