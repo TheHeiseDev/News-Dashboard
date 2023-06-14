@@ -29,16 +29,22 @@ export type CommentsType = {
   date: string;
   country?: string;
 };
-export  interface Statistics {
+
+export interface Statistics {
   quantityPosts: number;
-  quantityLikes: number;
-  quantityComments: number;
-  commentsByCountry: CommentsByCountry[];
-  commentsByCategory: CommentsByCategory[];
-  likesByCountry: LikesByCountry[];
-  likesByCategory: LikesByCategory[];
+  likesStats: {
+    quantityLikes: number;
+    likesByCountry: LikesByCountry[];
+    likesByCategory: LikesByCategory[];
+  };
+  commentsStats: {
+    quantityComments: number;
+    commentsByCountry: CommentsByCountry[];
+    commentsByCategory: CommentsByCategory[];
+  };
 }
-type CommentsByCountry = { country: string; quantity: number };
-type CommentsByCategory = { category: string; quantity: number };
-type LikesByCountry = { country: string; quantity: number };
-type LikesByCategory = { category: string; quantity: number };
+
+export type CommentsByCountry = { country: string; quantity: number };
+export type CommentsByCategory = { category: string; quantity: number };
+export type LikesByCountry = { country: string; quantity: number };
+export type LikesByCategory = { category: string; quantity: number };

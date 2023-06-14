@@ -18,6 +18,7 @@ export const HomePage = () => {
   const { visits, status } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPosts);
 
+  console.log(postsStatistics);
   useEffect(() => {
     dispatch(fetchVisit());
     dispatch(fetchPosts());
@@ -43,7 +44,7 @@ export const HomePage = () => {
               <div className={styles.infoBlock}>
                 <span className={styles.infoTitle}>Количество лайков</span>
                 <span className={styles.infoCount}>
-                  {postsStatistics ? postsStatistics.quantityLikes : 0}
+                  {postsStatistics ? postsStatistics.likesStats.quantityLikes : 0}
                 </span>
               </div>
               <div className={styles.iconBlock}>
@@ -55,7 +56,7 @@ export const HomePage = () => {
               <div className={styles.infoBlock}>
                 <span className={styles.infoTitle}>Количество комментариев</span>
                 <span className={styles.infoCount}>
-                  {postsStatistics ? postsStatistics.quantityComments : 0}
+                  {postsStatistics ? postsStatistics.commentsStats.quantityComments : 0}
                 </span>
               </div>
               <div className={styles.iconBlock}>
