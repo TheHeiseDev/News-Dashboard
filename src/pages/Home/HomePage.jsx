@@ -1,5 +1,5 @@
 import styles from "./HomePage.module.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { useAppDispatch } from "../../store/store";
@@ -19,10 +19,19 @@ export const HomePage = () => {
   const { postsStatistics } = useSelector(selectPosts);
 
   console.log(postsStatistics);
-  useEffect(() => {
-    dispatch(fetchVisit());
-    dispatch(fetchPosts());
+
+  // The first time you visit the site, you retrieve data from the server.
+  // In order to retrieve the actual data from the server and make a query, you need to update the page
+  const fetchVisitAndPosts = useCallback(() => {
+    if (!visits && !postsStatistics) {
+      dispatch(fetchVisit());
+      dispatch(fetchPosts());
+    }
   }, [dispatch]);
+
+  useEffect(() => {
+    fetchVisitAndPosts();
+  }, [fetchVisitAndPosts]);
 
   return (
     <MainLayout>

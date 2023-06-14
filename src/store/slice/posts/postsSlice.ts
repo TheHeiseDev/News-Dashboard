@@ -33,6 +33,7 @@ export const postsSlice = createSlice({
       });
   },
 });
+
 // export const {} = visitSlice.actions;
 export const selectPosts = (state: RootState) => state.posts;
 
