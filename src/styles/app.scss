@@ -2,9 +2,9 @@
 @import "./libs/variables";
 
 body {
-  // background-color: $bgColor;
-  background-color: black;
-  // background: url("./../assets/body-background.png") 0% 0% / cover;
+  background-color: $bgColor;
+  // background-color: black;
+  background: url("./../assets/body-background.png") 0% 0% / cover;
   color: $whiteColor;
   margin: 0px;
   font-size: 1.25rem;

@@ -1,5 +1,5 @@
 import styles from "./HomePage.module.scss";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { useAppDispatch } from "../../store/store";
@@ -9,10 +9,12 @@ import { selectPosts } from "../../store/slice/posts/postsSlice";
 import { fetchPosts } from "../../store/slice/posts/postsThunk";
 
 import { MainLayout } from "../../layouts/MainLayout";
+import { StatisticsMiniWidget } from "../../components/Widget/StatisticsMiniWidget/StatisticsMiniWidget";
+
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { AiOutlineFundView } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
-import { StatisticsMiniWidget } from "../../components/Widget/StatisticsMiniWidget";
+import { StatisticsLargeWidget } from "../../components/Widget/StatisticsLargeWidget/StatisticsLargeWidget";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -55,6 +57,12 @@ export const HomePage = () => {
               data={postsStatistics && postsStatistics.commentsStats.quantityComments}
               title="Кол-во комментариев"
               icon={<FaComments />}
+            />
+          </div>
+          <div className={styles.secondBlock}>
+            <StatisticsLargeWidget
+              data={visits && visits.byCountry}
+              title={"Кол-во посещений по странам"}
             />
           </div>
         </div>
