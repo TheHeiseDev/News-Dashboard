@@ -44,11 +44,13 @@ export const HomePage = () => {
               title="Кол-во посещений"
               icon={<AiOutlineFundView />}
             />
+
             <StatisticsMiniWidget
               data={postsStatistics && postsStatistics.likesStats.quantityLikes}
               title="Кол-во лайков"
               icon={<BsFillHeartPulseFill />}
             />
+
             <StatisticsMiniWidget
               data={postsStatistics && postsStatistics.commentsStats.quantityComments}
               title="Кол-во комментариев"
