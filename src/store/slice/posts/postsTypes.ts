@@ -1,14 +1,25 @@
-import { StatusType } from "../visit/visitTypes";
+import { StatusEnum } from "../visit/visitTypes";
 
-export type LikesType = {
-  ip: string;
-  country: string;
-};
+
 
 export type PostsSliceInitial = {
   postsStatistics: Statistics | null;
-  status: StatusType;
+  status: StatusEnum;
 };
+export interface Statistics {
+  quantityPosts: number;
+  likesStats: {
+    quantityLikes: number;
+    likesByCountry: LikesByCountry[];
+    likesByCategory: LikesByCategory[];
+  };
+  commentsStats: {
+    quantityComments: number;
+    commentsByCountry: CommentsByCountry[];
+    commentsByCategory: CommentsByCategory[];
+  };
+}
+
 export type PostType = {
   id: string;
   title: string;
@@ -29,20 +40,12 @@ export type CommentsType = {
   date: string;
   country?: string;
 };
+export type LikesType = {
+  ip: string;
+  country: string;
+};
 
-export interface Statistics {
-  quantityPosts: number;
-  likesStats: {
-    quantityLikes: number;
-    likesByCountry: LikesByCountry[];
-    likesByCategory: LikesByCategory[];
-  };
-  commentsStats: {
-    quantityComments: number;
-    commentsByCountry: CommentsByCountry[];
-    commentsByCategory: CommentsByCategory[];
-  };
-}
+
 
 export type CommentsByCountry = { country: string; quantity: number };
 export type CommentsByCategory = { category: string; quantity: number };

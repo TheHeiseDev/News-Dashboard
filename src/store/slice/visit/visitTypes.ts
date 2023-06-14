@@ -1,6 +1,6 @@
 export type VisitSliceInitial = {
   visits: VisitStatisticsType | null;
-  status: StatusType;
+  status: StatusEnum;
 };
 
 export type VisitStatisticsType = {
@@ -18,16 +18,16 @@ export type VisitType = {
   os: string;
 };
 
-export enum StatusType {
+export enum StatusEnum {
   loading = "loadig",
   success = "success",
   error = "error",
 }
+
 interface CountryStats {
   country: string;
   quantity: number;
 }
-
 interface DeviceStats {
   platform: string;
   quantity: number;

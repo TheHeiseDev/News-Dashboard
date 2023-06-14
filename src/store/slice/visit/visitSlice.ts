@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { StatusType, VisitSliceInitial, VisitStatisticsType } from "./visitTypes";
+import { StatusEnum, VisitSliceInitial, VisitStatisticsType } from "./visitTypes";
 import { fetchVisit } from "./visitThunk";
 
 const initialState: VisitSliceInitial = {
   visits: null,
-  status: StatusType.loading,
+  status: StatusEnum.loading,
 };
 export const visitSlice = createSlice({
   name: "visit",
@@ -16,7 +16,7 @@ export const visitSlice = createSlice({
     builder
       .addCase(fetchVisit.pending, (state) => {
         state.visits = null;
-        state.status = StatusType.loading;
+        state.status = StatusEnum.loading;
       })
       .addCase(fetchVisit.fulfilled, (state, action) => {
         const statistics: VisitStatisticsType = action.payload.reduce(
@@ -46,11 +46,11 @@ export const visitSlice = createSlice({
           { numberOfVisits: 0, byCountry: [], byDevice: [] }
         );
         state.visits = statistics;
-        state.status = StatusType.success;
+        state.status = StatusEnum.success;
       })
       .addCase(fetchVisit.rejected, (state) => {
         state.visits = null;
-        state.status = StatusType.error;
+        state.status = StatusEnum.error;
       });
   },
 });
