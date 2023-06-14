@@ -12,6 +12,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { AiOutlineFundView } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
+import { StatisticsMiniWidget } from "../../components/Widget/StatisticsMiniWidget";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -38,40 +39,21 @@ export const HomePage = () => {
       <div className={styles.page}>
         <div className={styles.homePageWrapper}>
           <div className={styles.fistBlock}>
-            <div className={styles.statisticsBlock}>
-              <div className={styles.infoBlock}>
-                <span className={styles.infoTitle}>Количество посещений</span>
-                <span className={styles.infoCount}>
-                  {visits ? visits.numberOfVisits : 0}
-                </span>
-              </div>
-              <div className={styles.iconBlock}>
-                <AiOutlineFundView />
-              </div>
-            </div>
-            <div className={styles.statisticsBlock}>
-              <div className={styles.infoBlock}>
-                <span className={styles.infoTitle}>Количество лайков</span>
-                <span className={styles.infoCount}>
-                  {postsStatistics ? postsStatistics.likesStats.quantityLikes : 0}
-                </span>
-              </div>
-              <div className={styles.iconBlock}>
-                <BsFillHeartPulseFill />
-              </div>
-            </div>
-
-            <div className={styles.statisticsBlock}>
-              <div className={styles.infoBlock}>
-                <span className={styles.infoTitle}>Количество комментариев</span>
-                <span className={styles.infoCount}>
-                  {postsStatistics ? postsStatistics.commentsStats.quantityComments : 0}
-                </span>
-              </div>
-              <div className={styles.iconBlock}>
-                <FaComments />
-              </div>
-            </div>
+            <StatisticsMiniWidget
+              data={visits && visits.numberOfVisits}
+              title="Кол-во посещений"
+              icon={<AiOutlineFundView />}
+            />
+            <StatisticsMiniWidget
+              data={postsStatistics && postsStatistics.likesStats.quantityLikes}
+              title="Кол-во лайков"
+              icon={<BsFillHeartPulseFill />}
+            />
+            <StatisticsMiniWidget
+              data={postsStatistics && postsStatistics.commentsStats.quantityComments}
+              title="Кол-во комментариев"
+              icon={<FaComments />}
+            />
           </div>
         </div>
       </div>
