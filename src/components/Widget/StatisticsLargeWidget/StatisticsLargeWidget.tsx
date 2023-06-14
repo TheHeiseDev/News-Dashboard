@@ -1,9 +1,10 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import styles from "./StatisticsLargeWidget.module.scss";
 import chart from "../../../assets/chart.webp";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
+import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
 
 interface ILargeWidget {
   data: any;
@@ -11,6 +12,36 @@ interface ILargeWidget {
 }
 
 export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
+  const [dataChar, setDataChar] = useState<object | null>(null);
+  const [dataCountryQuantity, setDataCountryQuantity] = useState([]);
+  const [dataCountryNames, setDataCountryNames] = useState([]);
+
+  useEffect(() => {
+    if (data && data.length) {
+      const countryArr = data.map((item: any) => item.quantity);
+      const countryArrNames = data.map((item: any) => item.country);
+      setDataCountryQuantity(countryArr);
+      setDataCountryNames(countryArrNames);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const datas = {
+      labels: dataCountryNames,
+      datasets: [
+        {
+          label: "Кол-во",
+          data: dataCountryQuantity,
+          backgroundColor: bgColorRandom(dataCountryQuantity.length),
+          borderColor: ["black"],
+          borderWidth: 1,
+        },
+      ],
+    };
+    setDataChar(datas);
+  }, [dataCountryQuantity]);
+
+  // console.log(dataCountry)
   return (
     <div className={styles.largeWidgetWrapper}>
       <div className={styles.titleContainer}>
@@ -20,7 +51,7 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
           <span>За весь период</span>
         </span>
         <div className={styles.chart}>
-          <img src={chart} alt="chart" />
+          {dataChar ? <CircleChart data={dataChar} /> : <div>Char</div>}
         </div>
       </div>
 

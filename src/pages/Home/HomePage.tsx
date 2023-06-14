@@ -21,8 +21,6 @@ export const HomePage = () => {
   const { visits, status } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPosts);
 
-  console.log(postsStatistics);
-
   // The first time you visit the site, you retrieve data from the server.
   // In order to retrieve the actual data from the server and make a query, you need to update the page
   const fetchVisitAndPosts = useCallback(() => {
@@ -42,27 +40,37 @@ export const HomePage = () => {
         <div className={styles.homePageWrapper}>
           <div className={styles.fistBlock}>
             <StatisticsMiniWidget
-              data={visits && visits.numberOfVisits}
+              data={visits?.numberOfVisits}
               title="Кол-во посещений"
               icon={<AiOutlineFundView />}
             />
 
             <StatisticsMiniWidget
-              data={postsStatistics && postsStatistics.likesStats.quantityLikes}
+              data={postsStatistics?.likesStats.quantityLikes}
               title="Кол-во лайков"
               icon={<BsFillHeartPulseFill />}
             />
 
             <StatisticsMiniWidget
-              data={postsStatistics && postsStatistics.commentsStats.quantityComments}
+              data={postsStatistics?.commentsStats.quantityComments}
               title="Кол-во комментариев"
               icon={<FaComments />}
             />
           </div>
           <div className={styles.secondBlock}>
             <StatisticsLargeWidget
-              data={visits && visits.byCountry}
+              data={visits?.byCountry}
               title={"Кол-во посещений по странам"}
+            />
+            
+            <StatisticsLargeWidget
+              data={postsStatistics?.likesStats.likesByCountry}
+              title={"Кол-во лайков по странам"}
+            />
+
+            <StatisticsLargeWidget
+              data={postsStatistics?.commentsStats.commentsByCountry}
+              title={"Комментарии по странам"}
             />
           </div>
         </div>
