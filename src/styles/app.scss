@@ -2,22 +2,12 @@
 @import "./libs/variables";
 
 body {
-  background-color: $bgColor;
+  // background-color: $bgColor;
+  background-color: black;
   // background: url("./../assets/body-background.png") 0% 0% / cover;
   color: $whiteColor;
   margin: 0px;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.625;
-}
-
-.container {
-  max-width: 1420px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
-.Mui-selected {
-  border: 1px solid $mainColor !important;
-  background-color: rgba(53, 167, 112, 0.225) !important;
 }

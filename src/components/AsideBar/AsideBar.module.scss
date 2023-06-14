@@ -113,3 +113,14 @@
     background: $mainColor;
   }
 }
+
+.activeLink {
+  background: rgb(26, 31, 55);
+
+  & svg {
+    fill: rgb(26, 31, 55) !important;
+  }
+  & .itemIcon {
+    background: $mainColor;
+  }
+}

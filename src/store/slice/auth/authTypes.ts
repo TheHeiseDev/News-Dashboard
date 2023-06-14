@@ -1,3 +1,3 @@
-export type VisitSliceInitial = {
+export type asd = {
   items: string[];
 };

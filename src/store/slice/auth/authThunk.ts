@@ -4,7 +4,7 @@ import { apiService } from "../../../api/apiService";
 
 type ParamsType = {};
 
-export const fetchVisit = createAsyncThunk(
+export const sdsd = createAsyncThunk(
   "visit/fetchVisit",
   async (params: ParamsType) => {
     // const { date, country, device, os,ip } = params;

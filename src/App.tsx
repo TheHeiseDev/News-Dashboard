@@ -4,6 +4,7 @@ import { HomePage } from "./pages/Home/HomePage";
 import { SubscribersPage } from "./pages/Subscribers/SubscribersPage";
 import { PostsPage } from "./pages/Posts/PostsPage";
 import { StatisticsPage } from "./pages/Statistics/StatisticsPage";
+import { Authorization } from "./pages/Authorization/Authorization";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/statistics" element={<StatisticsPage />} />
       <Route path="/posts" element={<PostsPage />} />
       <Route path="/subsribers" element={<SubscribersPage />} />
+      <Route path="/auth" element={<Authorization />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
