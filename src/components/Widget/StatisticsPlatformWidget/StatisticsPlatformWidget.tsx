@@ -1,46 +1,47 @@
 import { memo, useEffect, useState } from "react";
-import styles from "./StatisticsLargeWidget.module.scss";
-import chart from "../../../assets/chart.webp";
+import styles from "./StatisticsPlatformWidget.module.scss";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
+import { VerticalChart } from "../../Charts/VerticalChart";
 
-interface ILargeWidget {
-  data: any;
+type data = {
+  platform: string;
+  quantity: number;
+};
+interface IPlatformWidget {
+  data: data[] | undefined;
   title: string;
 }
 
-export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
-  const [dataChar, setDataChar] = useState<object | null>(null);
-  const [dataCountryQuantity, setDataCountryQuantity] = useState([]);
-  const [dataCountryNames, setDataCountryNames] = useState([]);
+export const StatisticsPlatformWidget = memo(({ data, title }: IPlatformWidget) => {
+  const [dataChart, setDataChart] = useState<object | null>(null);
+  const [deviceNameList, setDeviceNameList] = useState<string[]>([]);
+  const [deviceQuantityList, setDeviceQuantityList] = useState<number[]>([]);
 
   useEffect(() => {
     if (data && data.length) {
-      const countryArr = data.map((item: any) => item.quantity);
-      const countryArrNames = data.map((item: any) => item.country);
-      setDataCountryQuantity(countryArr);
-      setDataCountryNames(countryArrNames);
+      const deviceName = data.map((item: data) => item.platform);
+      const deviceQuantity = data.map((item: any) => item.quantity);
+
+      setDeviceNameList(deviceName);
+      setDeviceQuantityList(deviceQuantity);
     }
   }, [data]);
 
   useEffect(() => {
     const datas = {
-      labels: dataCountryNames,
+      labels: deviceNameList,
       datasets: [
         {
-          label: "Кол-во",
-          data: dataCountryQuantity,
-          backgroundColor: bgColorRandom(dataCountryQuantity.length),
-          borderColor: ["black"],
-          borderWidth: 1,
+          label: "Устройство",
+          data: deviceQuantityList,
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
         },
       ],
     };
-    setDataChar(datas);
-  }, [dataCountryQuantity]);
-
+    setDataChart(datas);
+  }, [deviceNameList, deviceQuantityList]);
   return (
     <div className={styles.largeWidgetWrapper}>
       <div className={styles.titleContainer}>
@@ -50,7 +51,7 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
           <span>За весь период</span>
         </span>
         <div className={styles.chart}>
-          {dataChar ? <CircleChart data={dataChar} /> : <div>Char</div>}
+          {dataChart && <VerticalChart data={dataChart} />}
         </div>
       </div>
 
@@ -59,17 +60,17 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
         {data ? (
           <>
             <div className={styles.headerTables}>
-              <span>Страна</span>
+              <span>Устройство</span>
               <span>Посещения</span>
             </div>
             <ul className={styles.statisticsList}>
-              {data.map((visit: any) => (
-                <li key={visit.country} className={styles.visitItem}>
+              {data.map((item: data) => (
+                <li key={item.platform} className={styles.visitItem}>
                   <div className={styles.visitItemWrapper}>
                     <span className={styles.itemTitle}>
-                      <TfiWorld /> {visit.country}
+                      <TfiWorld /> {item.platform}
                     </span>
-                    <span className={styles.itemQuantity}>{visit.quantity}</span>
+                    <span className={styles.itemQuantity}>{item.quantity}</span>
                   </div>
                 </li>
               ))}

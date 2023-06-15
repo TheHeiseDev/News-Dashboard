@@ -15,12 +15,13 @@ import { BsFillHeartPulseFill } from "react-icons/bs";
 import { AiOutlineFundView } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
 import { StatisticsLargeWidget } from "../../components/Widget/StatisticsLargeWidget/StatisticsLargeWidget";
+import { StatisticsPlatformWidget } from "../../components/Widget/StatisticsPlatformWidget/StatisticsPlatformWidget";
+import { StatisticsCategoryWidget } from "../../components/Widget/StatisticsCategoryWidget/StatisticsCategoryWidget";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { visits, status } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPosts);
-
   // The first time you visit the site, you retrieve data from the server.
   // In order to retrieve the actual data from the server and make a query, you need to update the page
   const fetchVisitAndPosts = useCallback(() => {
@@ -60,17 +61,33 @@ export const HomePage = () => {
           <div className={styles.secondBlock}>
             <StatisticsLargeWidget
               data={visits?.byCountry}
-              title={"Кол-во посещений по странам"}
+              title={"Статистика посещений"}
             />
-            
+
             <StatisticsLargeWidget
               data={postsStatistics?.likesStats.likesByCountry}
-              title={"Кол-во лайков по странам"}
+              title={"Статистика лайков"}
             />
 
             <StatisticsLargeWidget
               data={postsStatistics?.commentsStats.commentsByCountry}
-              title={"Комментарии по странам"}
+              title={"Статистика комментариев"}
+            />
+          </div>
+          <div className={styles.thirdBlock}>
+            <StatisticsPlatformWidget
+              title="Посещения по устройствам"
+              data={visits?.byDevice}
+            />
+
+            <StatisticsCategoryWidget
+              title="Лайки по категориям"
+              data={postsStatistics?.likesStats.likesByCategory}
+            />
+
+            <StatisticsCategoryWidget
+              title="Комментарии по категориям"
+              data={postsStatistics?.commentsStats.commentsByCategory}
             />
           </div>
         </div>

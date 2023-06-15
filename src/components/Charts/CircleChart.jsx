@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Chart, Doughnut } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -48,20 +48,18 @@ export function CircleChart({ data }) {
           },
         },
       },
+
       legend: {
-        displayColors: true,
         display: false,
+        position: "left",
+
         labels: {
-          color: "rgb(255, 99, 132)",
-        },
-      },
-      title: {
-        display: false,
-        labels: ["sdsd", "sdsds"],
-        text: "Custom Chart Title",
-        padding: {
-          top: 10,
-          bottom: 30,
+          display: false,
+          color: "white",
+          boxWidth: 10,
+          boxHeight: 10,
+          pointStyle: "circle",
+          align: "center",
         },
       },
     },
