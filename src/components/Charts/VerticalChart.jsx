@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +24,6 @@ const options = {
   },
 };
 
-export function VerticalChart({ data }) {
+export const VerticalChart = ({ data }) => {
   return <Bar options={options} data={data} />;
-}
+};

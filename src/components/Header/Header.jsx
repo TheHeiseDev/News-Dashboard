@@ -26,7 +26,7 @@ export const Header = () => {
           <nav>
             <div>
               <div className={styles.navIcon}>
-                <IoHome onClick={() => navigate("/")}/>
+                <IoHome onClick={() => navigate("/")} />
               </div>
               /<div className={styles.navLinkText}>{pageName(thisPage)}</div>
             </div>

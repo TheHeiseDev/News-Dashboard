@@ -1,32 +1,28 @@
-import { memo, useEffect, useState } from "react";
 import styles from "./StatisticsLargeWidget.module.scss";
-import chart from "../../../assets/chart.webp";
+import { memo, useEffect, useMemo, useState } from "react";
+import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
+
+type visitData = {
+  country: string;
+  quantity: number;
+};
 
 interface ILargeWidget {
-  data: any;
+  data: visitData[] | undefined;
   title: string;
 }
 
 export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
   const [dataChar, setDataChar] = useState<object | null>(null);
-  const [dataCountryQuantity, setDataCountryQuantity] = useState([]);
-  const [dataCountryNames, setDataCountryNames] = useState([]);
+  const [dataCountryQuantity, setDataCountryQuantity] = useState<number[]>([]);
+  const [dataCountryNames, setDataCountryNames] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (data && data.length) {
-      const countryArr = data.map((item: any) => item.quantity);
-      const countryArrNames = data.map((item: any) => item.country);
-      setDataCountryQuantity(countryArr);
-      setDataCountryNames(countryArrNames);
-    }
-  }, [data]);
 
-  useEffect(() => {
-    const datas = {
+  const dataParam = useMemo(
+    () => ({
       labels: dataCountryNames,
       datasets: [
         {
@@ -37,8 +33,21 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
           borderWidth: 1,
         },
       ],
-    };
-    setDataChar(datas);
+    }),
+    [dataCountryNames, dataCountryQuantity]
+  );
+
+  useEffect(() => {
+    if (data && data.length) {
+      const countryArr = data.map((item: visitData) => item.quantity);
+      const countryArrNames = data.map((item: visitData) => item.country);
+      setDataCountryQuantity(countryArr);
+      setDataCountryNames(countryArrNames);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setDataChar(dataParam);
   }, [dataCountryQuantity]);
 
   return (
@@ -63,7 +72,7 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
               <span>Посещения</span>
             </div>
             <ul className={styles.statisticsList}>
-              {data.map((visit: any) => (
+              {data.map((visit: visitData) => (
                 <li key={visit.country} className={styles.visitItem}>
                   <div className={styles.visitItemWrapper}>
                     <span className={styles.itemTitle}>

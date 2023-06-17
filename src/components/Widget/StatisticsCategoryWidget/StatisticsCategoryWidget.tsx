@@ -1,16 +1,17 @@
-import { memo, useCallback, useEffect, useState } from "react";
 import styles from "./StatisticsCategoryWidget.module.scss";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { VerticalChart } from "../../Charts/VerticalChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-import { VerticalChart } from "../../Charts/VerticalChart";
 
-type data = {
+
+type dataCategory = {
   category: string;
   quantity: number;
 };
 interface ICategoryWidget {
-  data: data[] | undefined;
+  data: dataCategory[] | undefined;
   title: string;
 }
 
@@ -36,10 +37,24 @@ export const StatisticsCategoryWidget = memo(({ data, title }: ICategoryWidget) 
     }
   }, []);
 
+  const dataParam = useMemo(
+    () => ({
+      labels: categoryNameList,
+      datasets: [
+        {
+          label: "Устройство",
+          data: categoryQuantityList,
+          backgroundColor: "rgb(57, 241, 152)",
+        },
+      ],
+    }),
+    [categoryNameList, categoryQuantityList]
+  );
+
   useEffect(() => {
     if (data && data.length) {
-      const deviceName = data.map((item: data) => setCategoryName(item.category));
-      const deviceQuantity = data.map((item: any) => item.quantity);
+      const deviceName = data.map((item: dataCategory) => setCategoryName(item.category));
+      const deviceQuantity = data.map((item: dataCategory) => item.quantity);
 
       setDeviceNameList(deviceName);
       setDeviceQuantityList(deviceQuantity);
@@ -47,18 +62,9 @@ export const StatisticsCategoryWidget = memo(({ data, title }: ICategoryWidget) 
   }, [data]);
 
   useEffect(() => {
-    const datas = {
-      labels: categoryNameList,
-      datasets: [
-        {
-          label: "Устройство",
-          data: categoryQuantityList,
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-        },
-      ],
-    };
-    setDataChart(datas);
-  }, [categoryNameList,categoryQuantityList]);
+    setDataChart(dataParam);
+  }, [categoryNameList, categoryQuantityList]);
+
   return (
     <div className={styles.largeWidgetWrapper}>
       <div className={styles.titleContainer}>
@@ -81,7 +87,7 @@ export const StatisticsCategoryWidget = memo(({ data, title }: ICategoryWidget) 
               <span>Посещения</span>
             </div>
             <ul className={styles.statisticsList}>
-              {data.map((item: data) => (
+              {data.map((item: dataCategory) => (
                 <li key={item.category} className={styles.visitItem}>
                   <div className={styles.visitItemWrapper}>
                     <span className={styles.itemTitle}>

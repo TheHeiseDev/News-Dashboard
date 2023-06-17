@@ -1,5 +1,6 @@
-import { memo } from "react";
 import styles from "./StatisticsMiniWidget.module.scss";
+import { memo } from "react";
+
 
 interface IMiniWidget {
   data: string | number | null | undefined;

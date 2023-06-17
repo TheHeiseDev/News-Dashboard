@@ -1,16 +1,17 @@
-import { memo, useEffect, useState } from "react";
 import styles from "./StatisticsPlatformWidget.module.scss";
+import { memo, useEffect, useMemo, useState } from "react";
+import { VerticalChart } from "../../Charts/VerticalChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-import { VerticalChart } from "../../Charts/VerticalChart";
 
-type data = {
+
+type PlatformData = {
   platform: string;
   quantity: number;
 };
 interface IPlatformWidget {
-  data: data[] | undefined;
+  data: PlatformData[] | undefined;
   title: string;
 }
 
@@ -19,10 +20,24 @@ export const StatisticsPlatformWidget = memo(({ data, title }: IPlatformWidget) 
   const [deviceNameList, setDeviceNameList] = useState<string[]>([]);
   const [deviceQuantityList, setDeviceQuantityList] = useState<number[]>([]);
 
+  const dataParam = useMemo(
+    () => ({
+      labels: deviceNameList,
+      datasets: [
+        {
+          label: "Устройство",
+          data: deviceQuantityList,
+          backgroundColor: "rgb(57, 241, 152)",
+        },
+      ],
+    }),
+    [deviceNameList, deviceQuantityList]
+  );
+
   useEffect(() => {
     if (data && data.length) {
-      const deviceName = data.map((item: data) => item.platform);
-      const deviceQuantity = data.map((item: any) => item.quantity);
+      const deviceName = data.map((item: PlatformData) => item.platform);
+      const deviceQuantity = data.map((item: PlatformData) => item.quantity);
 
       setDeviceNameList(deviceName);
       setDeviceQuantityList(deviceQuantity);
@@ -30,17 +45,7 @@ export const StatisticsPlatformWidget = memo(({ data, title }: IPlatformWidget) 
   }, [data]);
 
   useEffect(() => {
-    const datas = {
-      labels: deviceNameList,
-      datasets: [
-        {
-          label: "Устройство",
-          data: deviceQuantityList,
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-        },
-      ],
-    };
-    setDataChart(datas);
+    setDataChart(dataParam);
   }, [deviceNameList, deviceQuantityList]);
   return (
     <div className={styles.largeWidgetWrapper}>
@@ -64,7 +69,7 @@ export const StatisticsPlatformWidget = memo(({ data, title }: IPlatformWidget) 
               <span>Посещения</span>
             </div>
             <ul className={styles.statisticsList}>
-              {data.map((item: data) => (
+              {data.map((item: PlatformData) => (
                 <li key={item.platform} className={styles.visitItem}>
                   <div className={styles.visitItemWrapper}>
                     <span className={styles.itemTitle}>
