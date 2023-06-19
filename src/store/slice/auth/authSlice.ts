@@ -1,38 +1,22 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import { RootState } from "../../store";
-// import { VisitType } from "./visitTypes";
-// import { fetchAllVisitByDate, fetchVisit } from "./visitThunk";
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store";
+import { IAuthSlice } from "./authTypes";
 
-// const initialState: VisitType = {
-//   visitItem: null,
-//   visitByDate: null,
-// };
-// export const visitSlice = createSlice({
-//   name: "visit",
-//   initialState,
-//   reducers: {},
+const initialState: IAuthSlice = {
+  id: null,
+  email: null,
+  token: null,
+  error: null,
+  role: null,
+};
+export const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {},
 
-//   extraReducers: (builder) => {
-//     builder
-//       .addCase(fetchVisit.pending, (state) => {})
+  extraReducers: (builder) => {},
+});
+export const {} = authSlice.actions;
+export const selectAuth = (state: RootState) => state.auth;
 
-//       .addCase(fetchVisit.fulfilled, (state, action) => {
-//         state.visitItem = action.payload;
-//       })
-//       .addCase(fetchVisit.rejected, (state) => {
-//         state.visitItem = null;
-//       })
-//       .addCase(fetchAllVisitByDate.pending, (state) => {})
-
-//       .addCase(fetchAllVisitByDate.fulfilled, (state, action) => {
-//         state.visitByDate = action.payload;
-//       })
-//       .addCase(fetchAllVisitByDate.rejected, (state) => {
-//         state.visitByDate = null;
-//       });
-//   },
-// });
-// export const {} = visitSlice.actions;
-// export const selectVisit = (state: RootState) => state.visit.visitByDate;
-
-// export default visitSlice.reducer;
+export default authSlice.reducer;
