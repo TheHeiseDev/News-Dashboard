@@ -1,7 +1,7 @@
 @import "../../styles/libs/variables";
 
 .asideBar {
-  width: 250px;
+  width: 270px;
   z-index: 1200;
   position: fixed;
   top: 25px;
@@ -9,11 +9,13 @@
   margin: 1rem;
   border: none;
   outline: 0px;
+  height: 92vh;
 }
 .asideBarWrapper {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .logo {
@@ -122,5 +124,37 @@
   }
   & .itemIcon {
     background: $mainColor;
+  }
+}
+
+.authStatusInfo {
+  margin-top: auto;
+  -webkit-backdrop-filter: blur(120px);
+  backdrop-filter: blur(120px);
+  background: none;
+
+  font-size: 16px;
+  border-radius: 20px;
+  color: black;
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 13px 0 13px 0;
+    & li {
+      padding-top: 2px;
+      padding-bottom: 2px;
+      background: none;
+      &:hover {
+        background: none;
+      }
+      & .itemIcon {
+        background: #5842fc;
+        & svg {
+          fill: white !important;
+        }
+      }
+    }
   }
 }
