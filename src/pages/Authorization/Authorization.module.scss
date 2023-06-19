@@ -89,6 +89,23 @@
       background: rgb(12, 68, 159);
     }
   }
+
+  & .inputContainerPass {
+    position: relative;
+  }
+  & .eye {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    top: 14px;
+    right: 10px;
+    font-size: 16px;
+    opacity: 0.7;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 .error {
   font-size: 12px;
