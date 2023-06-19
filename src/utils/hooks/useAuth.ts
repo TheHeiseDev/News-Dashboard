@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
-// import { selectUser } from "store/slice/userSlice/userSlice";
+import { selectAuth } from "../../store/slice/auth/authSlice";
 
-// export const useAuth = () => {
-//   const { email, token, id } = useSelector(selectUser);
+export const useAuth = () => {
+  const { user } = useSelector(selectAuth);
 
-//   return {
-//     isAuth: !!email,
-//     email,
-//     token,
-//     id,
-//   };
-// };
+  return {
+    isAuth: !!user?.email,
+    email: user?.email,
+    token: user?.token,
+    id: user?.id,
+  };
+};

@@ -1,11 +1,18 @@
 export interface IAuthSlice {
+  user: UserType | null;
+  error: Error | null;
+}
+export enum RoleEnum {
+  admin = "admin",
+  manager = "manager",
+}
+export type UserType = {
   id: string | null;
   email: string | null;
   token: string | null;
-  error: null;
-  role: RollуEnum | null
-}
-export enum RollуEnum {
-  admin =  "admin",
-  manager = "manager",
-}
+  role: RoleEnum | null;
+};
+type Error = {
+  status: boolean;
+  message: string | null;
+};

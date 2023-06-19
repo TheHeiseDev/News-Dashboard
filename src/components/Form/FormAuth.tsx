@@ -7,19 +7,26 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { selectError, setError, setUser } from "../../store/slice/auth/authSlice";
+import { RoleEnum } from "../../store/slice/auth/authTypes";
+import { useAuth } from "../../utils/hooks/useAuth";
+import { saveInLocalStorage } from "../../utils/saveInLocalStorage";
 
-// enum ErrorCodeSignIn {
-//   login = "auth/user-not-found",
-//   password = "auth/wrong-password",
-//   anyRequest = "auth/too-many-requests",
-//   invalideEmail = "auth/invalid-email",
-// }
+enum ErrorCodeSignIn {
+  login = "auth/user-not-found",
+  password = "auth/wrong-password",
+  anyRequest = "auth/too-many-requests",
+  invalideEmail = "auth/invalid-email",
+}
 
 export const FormAuth = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [viewPass, setViewPass] = useState(false);
-  const [error, SetError] = useState(false);
+  const errorAuth = useSelector(selectError);
+  const {isAuth} = useAuth();
 
   const validationSchema = yup.object().shape({
     email: yup.string().required("Обязательное поле").email("Некорректный email"),
@@ -29,30 +36,30 @@ export const FormAuth = () => {
       .min(6, "минимальная длина 4 символа"),
   });
 
-  const handleSetError = (status, message) => {
+  const handleSetError = (status: boolean, message: string) => {
     const objError = {
       status,
       message,
     };
-    // dispatch(setError(objError));
+    dispatch(setError(objError));
   };
 
-  const errorHandler = (errorMessage) => {
-    // if (errorMessage === ErrorCodeSignIn.login) {
-    //   handleSetError(true, "Неверный логин");
-    // } else if (errorMessage === ErrorCodeSignIn.password) {
-    //   handleSetError(true, "Неверный пароль");
-    // } else if (errorMessage === ErrorCodeSignIn.anyRequest) {
-    //   handleSetError(true, "Много попыток, попробуйте позже");
-    // } else if (errorMessage === ErrorCodeSignIn.invalideEmail) {
-    //   handleSetError(true, "Некорретный email адресс");
-    // } else {
-    //   console.log(errorMessage);
-    //   handleSetError(true, "Возникла ошибка при авторизации");
-    // }
+  const errorHandler = (errorMessage: string) => {
+    if (errorMessage === ErrorCodeSignIn.login) {
+      handleSetError(true, "Неверный логин или пароль");
+    } else if (errorMessage === ErrorCodeSignIn.password) {
+      handleSetError(true, "Неверный логин или пароль");
+    } else if (errorMessage === ErrorCodeSignIn.anyRequest) {
+      handleSetError(true, "Много попыток, попробуйте позже");
+    } else if (errorMessage === ErrorCodeSignIn.invalideEmail) {
+      handleSetError(true, "Некорретный email адресс");
+    } else {
+      console.log(errorMessage);
+      handleSetError(true, "Возникла ошибка при авторизации");
+    }
   };
 
-  const handleLogin = (values) => {
+  const handleLogin = (values: { email: string; password: string }) => {
     setLoading(true);
     const auth = getAuth();
 
@@ -62,21 +69,24 @@ export const FormAuth = () => {
           email: user.email,
           token: user.refreshToken,
           id: user.uid,
+          role:
+            user.email === process.env.REACT_APP_ADMIN_EMAIL
+              ? RoleEnum.admin
+              : RoleEnum.manager,
         };
         //Store authorization data in localStorage
-        // saveInLocalStorage("authData", authData);
-        // dispatch(setUser(authData));
+        saveInLocalStorage("authData", authData);
+        dispatch(setUser(authData));
         setLoading(false);
         navigate("/", { replace: false });
       })
       .catch(({ code }) => {
         errorHandler(code);
-        console.log(code);
       })
       .finally(() => setLoading(false));
   };
 
-  return (
+  return !isAuth ? (
     <div className={styles.authForm}>
       <h2 className={styles.authTitle}>Вход в админ панель</h2>
 
@@ -123,7 +133,9 @@ export const FormAuth = () => {
           </Form>
         )}
       </Formik>
-      {error && <span className={styles.errorAuth}>Неверный логин или пароль</span>}
+      {errorAuth?.status && <span className={styles.errorAuth}>{errorAuth.message}</span>}
     </div>
+  ) : (
+    <Navigate to="/" />
   );
 };
