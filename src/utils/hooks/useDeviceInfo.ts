@@ -24,8 +24,11 @@ export function useDeviceInfo() {
     } else if (/windows phone/i.test(userAgent)) {
       deviceType = "Mobile";
       os = "Windows Phone";
+    } else if (/Win64/i.test(userAgent)) {
+      deviceType = "Tablet";
+      os = "Windows";
     } else {
-      deviceType = "Desktop";
+      deviceType = "Другие";
       os = navigator.platform;
     }
 

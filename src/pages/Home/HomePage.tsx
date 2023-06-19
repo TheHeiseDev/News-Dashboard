@@ -7,21 +7,22 @@ import { selectVisit } from "../../store/slice/visit/visitSlice";
 import { fetchVisit } from "../../store/slice/visit/visitThunk";
 import { selectPosts } from "../../store/slice/posts/postsSlice";
 import { fetchPosts } from "../../store/slice/posts/postsThunk";
-
 import { MainLayout } from "../../layouts/MainLayout";
+
 import { StatisticsMiniWidget } from "../../components/Widget/StatisticsMiniWidget/StatisticsMiniWidget";
+import { StatisticsLargeWidget } from "../../components/Widget/StatisticsLargeWidget/StatisticsLargeWidget";
+import { StatisticsPlatformWidget } from "../../components/Widget/StatisticsPlatformWidget/StatisticsPlatformWidget";
+import { StatisticsCategoryWidget } from "../../components/Widget/StatisticsCategoryWidget/StatisticsCategoryWidget";
 
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { AiOutlineFundView } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
-import { StatisticsLargeWidget } from "../../components/Widget/StatisticsLargeWidget/StatisticsLargeWidget";
-import { StatisticsPlatformWidget } from "../../components/Widget/StatisticsPlatformWidget/StatisticsPlatformWidget";
-import { StatisticsCategoryWidget } from "../../components/Widget/StatisticsCategoryWidget/StatisticsCategoryWidget";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { visits, status } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPosts);
+
   // The first time you visit the site, you retrieve data from the server.
   // In order to retrieve the actual data from the server and make a query, you need to update the page
   const fetchVisitAndPosts = useCallback(() => {

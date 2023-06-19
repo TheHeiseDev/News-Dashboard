@@ -1,0 +1,97 @@
+@import "../../styles/libs/variables";
+.auth {
+  height: 100vh;
+  background-color: black;
+  opacity: 0.7;
+}
+.authWrapper {
+  height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.authBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.welcomeText {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  & h1 {
+    font-size: 36px;
+    margin: 0 0 20px 0;
+  }
+  & span {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+}
+.authTitle {
+}
+.authLogo {
+  width: 300px;
+}
+.authForm {
+  margin: 0 auto;
+  width: 400px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & h2 {
+    margin-bottom: 20px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  & input {
+    height: 43px;
+    width: 100%;
+    padding: 0 10px;
+    background-color: black;
+    border-color: rgb(57 127 241);
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    margin: 0 0 20px 0;
+  }
+
+  & button {
+    background: rgb(57 127 241);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 30px;
+    transition: background-color 0.3s ease;
+    width: 100px;
+    align-self: center;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background: rgb(12, 68, 159);
+    }
+  }
+}
+.error {
+  font-size: 12px;
+  color: red;
+  margin: 0 0 10px 0;
+}
