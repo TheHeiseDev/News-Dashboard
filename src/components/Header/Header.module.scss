@@ -66,16 +66,40 @@
   & .auth {
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: color 0.3s ease;
+    gap: 20px;
+    height: 40px;
+    // transition: color 0.3s ease;
+
+    & .authUser {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+    }
     & .authImage {
+      display: flex;
+      cursor: pointer;
+      & img {
+        width: 25px;
+      }
     }
     & .authText {
       font-size: 16px;
+      display: flex;
+      height: 100%;
+      align-items: center;
+      margin: 0 10px 0 0;
+      &:hover {
+        color: $mainColor;
+        cursor: pointer;
+      }
     }
-    &:hover {
-      color: $mainColor;
+    & .authSignUp {
+      display: flex;
       cursor: pointer;
+      font-size: 25px;
+      &:hover {
+        color: $mainColor;
+      }
     }
   }
 }

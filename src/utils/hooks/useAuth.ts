@@ -9,5 +9,6 @@ export const useAuth = () => {
     email: user?.email,
     token: user?.token,
     id: user?.id,
+    role: user?.role,
   };
 };

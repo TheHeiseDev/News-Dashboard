@@ -1,17 +1,19 @@
 import styles from "./FormAuth.module.scss";
-import { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import * as yup from "yup";
-
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import CircularProgress from "@mui/material/CircularProgress";
+import { useCallback, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { selectError, setError, setUser } from "../../store/slice/auth/authSlice";
 import { RoleEnum } from "../../store/slice/auth/authTypes";
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "../../utils/hooks/useAuth";
 import { saveInLocalStorage } from "../../utils/saveInLocalStorage";
+import { Formik, Form, Field } from "formik";
+import * as yup from "yup";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import CircularProgress from "@mui/material/CircularProgress";
+
+
 
 enum ErrorCodeSignIn {
   login = "auth/user-not-found",
@@ -23,10 +25,12 @@ enum ErrorCodeSignIn {
 export const FormAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuth } = useAuth();
+  const errorAuth = useSelector(selectError);
+
   const [loading, setLoading] = useState(false);
   const [viewPass, setViewPass] = useState(false);
-  const errorAuth = useSelector(selectError);
-  const {isAuth} = useAuth();
+
 
   const validationSchema = yup.object().shape({
     email: yup.string().required("Обязательное поле").email("Некорректный email"),
@@ -36,28 +40,34 @@ export const FormAuth = () => {
       .min(6, "минимальная длина 4 символа"),
   });
 
-  const handleSetError = (status: boolean, message: string) => {
-    const objError = {
-      status,
-      message,
-    };
-    dispatch(setError(objError));
-  };
+  const handleSetError = useCallback(
+    (status: boolean, message: string) => {
+      const objError = {
+        status,
+        message,
+      };
+      dispatch(setError(objError));
+    },
+    [dispatch]
+  );
 
-  const errorHandler = (errorMessage: string) => {
-    if (errorMessage === ErrorCodeSignIn.login) {
-      handleSetError(true, "Неверный логин или пароль");
-    } else if (errorMessage === ErrorCodeSignIn.password) {
-      handleSetError(true, "Неверный логин или пароль");
-    } else if (errorMessage === ErrorCodeSignIn.anyRequest) {
-      handleSetError(true, "Много попыток, попробуйте позже");
-    } else if (errorMessage === ErrorCodeSignIn.invalideEmail) {
-      handleSetError(true, "Некорретный email адресс");
-    } else {
-      console.log(errorMessage);
-      handleSetError(true, "Возникла ошибка при авторизации");
-    }
-  };
+  const errorHandler = useCallback(
+    (errorMessage: string) => {
+      if (errorMessage === ErrorCodeSignIn.login) {
+        handleSetError(true, "Неверный логин или пароль");
+      } else if (errorMessage === ErrorCodeSignIn.password) {
+        handleSetError(true, "Неверный логин или пароль");
+      } else if (errorMessage === ErrorCodeSignIn.anyRequest) {
+        handleSetError(true, "Много попыток, попробуйте позже");
+      } else if (errorMessage === ErrorCodeSignIn.invalideEmail) {
+        handleSetError(true, "Некорретный email адресс");
+      } else {
+        console.log(errorMessage);
+        handleSetError(true, "Возникла ошибка при авторизации");
+      }
+    },
+    [handleSetError]
+  );
 
   const handleLogin = (values: { email: string; password: string }) => {
     setLoading(true);
@@ -72,8 +82,9 @@ export const FormAuth = () => {
           role:
             user.email === process.env.REACT_APP_ADMIN_EMAIL
               ? RoleEnum.admin
-              : RoleEnum.manager,
+              : RoleEnum.manager || null,
         };
+
         //Store authorization data in localStorage
         saveInLocalStorage("authData", authData);
         dispatch(setUser(authData));
