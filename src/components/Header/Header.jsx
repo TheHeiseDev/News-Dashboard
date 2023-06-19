@@ -69,6 +69,7 @@ export const Header = () => {
                   }
                   alt="user logo"
                 />
+                <span className={styles.online}></span>
               </div>
             </div>
             <div className={styles.authSignUp} onClick={signUpHandle}>
