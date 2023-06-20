@@ -1,17 +1,15 @@
 import styles from "./Header.module.scss";
-import { useEffect, useState } from "react";
-import { IoHome } from "react-icons/io5";
-
-import { AiOutlinePoweroff } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { RoleEnum } from "../../store/slice/auth/authTypes";
+import { removeUser } from "../../store/slice/auth/authSlice";
 import { useAuth } from "../../utils/hooks/useAuth";
+import { clearLocalStorage } from "../../utils/saveInLocalStorage";
+import { IoHome } from "react-icons/io5";
+import { AiOutlinePoweroff } from "react-icons/ai";
 import adminIcon from "../../assets/images/admin.png";
 import managerIcon from "../../assets/images/manager.png";
-import { RoleEnum } from "../../store/slice/auth/authTypes";
-import { clearLocalStorage } from "../../utils/saveInLocalStorage";
-import { useDispatch } from "react-redux";
-import { removeUser } from "../../store/slice/auth/authSlice";
-import { useLocation } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -32,6 +30,23 @@ export const Header = () => {
     dispatch(removeUser());
     clearLocalStorage();
     navigate("/auth", { replace: false });
+  };
+
+  const useRoleTranslateText = (role: RoleEnum | null | undefined): string => {
+    const translatedRole = useMemo(() => {
+      if (!role) {
+        return "";
+      }
+      if (role === RoleEnum.admin) {
+        return "Администратор";
+      }
+      if (role === RoleEnum.manager) {
+        return "Менеджер";
+      }
+      return "";
+    }, [role]);
+
+    return translatedRole;
   };
 
   useEffect(() => {
@@ -55,13 +70,7 @@ export const Header = () => {
         <div className={styles.headerActions}>
           <div className={styles.auth}>
             <div className={styles.authUser}>
-              <div className={styles.authText}>
-                {role === RoleEnum.admin
-                  ? "Администратор"
-                  : role === RoleEnum.manager
-                  ? "Менеджер"
-                  : ""}
-              </div>
+              <div className={styles.authText}>{useRoleTranslateText(role)}</div>
               <div className={styles.authImage}>
                 <img
                   src={
