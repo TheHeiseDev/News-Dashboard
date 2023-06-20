@@ -2,12 +2,12 @@ import styles from "./FormAuth.module.scss";
 import { useCallback, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectError, setError, setUser } from "../../store/slice/auth/authSlice";
-import { RoleEnum } from "../../store/slice/auth/authTypes";
+import { selectError, setError, setUser } from "../../../../store/slice/auth/authSlice";
+import { RoleEnum } from "../../../../store/slice/auth/authTypes";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../../utils/hooks/useAuth";
-import { saveInLocalStorage } from "../../utils/saveInLocalStorage";
+import { useAuth } from "../../../../shared/hooks/useAuth";
+import { saveInLocalStorage } from "../../../../shared/helpers/saveInLocalStorage";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -21,14 +21,6 @@ enum ErrorCodeSignIn {
 }
 
 export const FormAuth = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isAuth } = useAuth();
-  const errorAuth = useSelector(selectError);
-
-  const [loading, setLoading] = useState(false);
-  const [viewPass, setViewPass] = useState(false);
-
   const validationSchema = yup.object().shape({
     email: yup.string().required("Обязательное поле").email("Некорректный email"),
     password: yup
@@ -36,6 +28,13 @@ export const FormAuth = () => {
       .required("Обязательное поле")
       .min(6, "минимальная длина 4 символа"),
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isAuth } = useAuth();
+  const errorAuth = useSelector(selectError);
+
+  const [loading, setLoading] = useState(false);
+  const [viewPass, setViewPass] = useState(false);
 
   const handleSetError = useCallback(
     (status: boolean, message: string) => {

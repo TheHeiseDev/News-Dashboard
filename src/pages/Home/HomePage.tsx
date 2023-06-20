@@ -9,10 +9,10 @@ import { selectPosts } from "../../store/slice/posts/postsSlice";
 import { fetchPosts } from "../../store/slice/posts/postsThunk";
 import { MainLayout } from "../../layouts/MainLayout";
 
-import { StatisticsMiniWidget } from "../../components/Widget/StatisticsMiniWidget/StatisticsMiniWidget";
-import { StatisticsLargeWidget } from "../../components/Widget/StatisticsLargeWidget/StatisticsLargeWidget";
-import { StatisticsPlatformWidget } from "../../components/Widget/StatisticsPlatformWidget/StatisticsPlatformWidget";
-import { StatisticsCategoryWidget } from "../../components/Widget/StatisticsCategoryWidget/StatisticsCategoryWidget";
+import { StatisticsMiniWidget } from "./components/StatisticsMiniWidget/StatisticsMiniWidget";
+import { StatisticsLargeWidget } from "./components/StatisticsLargeWidget/StatisticsLargeWidget";
+import { StatisticsPlatformWidget } from "./components/StatisticsPlatformWidget/StatisticsPlatformWidget";
+import { StatisticsCategoryWidget } from "./components/StatisticsCategoryWidget/StatisticsCategoryWidget";
 
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import { AiOutlineFundView } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import styles from "./Authorization.module.scss";
-import { FormAuth } from "../../components/Form/FormAuth";
+import { FormAuth } from "./components/Form/FormAuth";
 
 import gif from "../../assets/gif/ai_animate3.gif";
 

@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { PrivateRouter } from "./utils/router/privateRouter";
+import { PrivateRouter } from "./shared/router/privateRouter";
 import { HomePage } from "./pages/Home/HomePage";
 import { SubscribersPage } from "./pages/Subscribers/SubscribersPage";
 import { PostsPage } from "./pages/Posts/PostsPage";

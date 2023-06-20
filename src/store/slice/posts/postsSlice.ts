@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { StatusEnum } from "../visit/visitTypes";
 import { fetchPosts } from "./postsThunk";
-import { getStatisticPosts } from "../../../utils/getStatisticPosts";
+import { getStatisticPosts } from "../../../shared/helpers/getStatisticPosts";
 import { PostsSliceInitial, Statistics } from "./postsTypes";
 
 const initialState: PostsSliceInitial = {

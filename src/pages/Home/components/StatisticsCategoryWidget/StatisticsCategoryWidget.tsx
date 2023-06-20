@@ -1,10 +1,9 @@
 import styles from "./StatisticsCategoryWidget.module.scss";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { VerticalChart } from "../../Charts/VerticalChart";
+import { VerticalChart } from "../../../../components/Charts/VerticalChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-
 
 type dataCategory = {
   category: string;

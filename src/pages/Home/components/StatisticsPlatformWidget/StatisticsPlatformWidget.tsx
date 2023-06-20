@@ -1,55 +1,51 @@
-import styles from "./StatisticsLargeWidget.module.scss";
+import styles from "./StatisticsPlatformWidget.module.scss";
 import { memo, useEffect, useMemo, useState } from "react";
-import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
+import { VerticalChart } from "../../../../components/Charts/VerticalChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-import { ChartData } from "chart.js";
 
-type visitData = {
-  country: string;
+type PlatformData = {
+  platform: string;
   quantity: number;
 };
-
-interface ILargeWidget {
-  data: visitData[] | undefined;
+interface IPlatformWidget {
+  data: PlatformData[] | undefined;
   title: string;
 }
 
-export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
-  const [dataChar, setDataChar] = useState<object | null>(null);
-  const [dataCountryQuantity, setDataCountryQuantity] = useState<number[]>([]);
-  const [dataCountryNames, setDataCountryNames] = useState<string[]>([]);
+export const StatisticsPlatformWidget = memo(({ data, title }: IPlatformWidget) => {
+  const [dataChart, setDataChart] = useState<object | null>(null);
+  const [deviceNameList, setDeviceNameList] = useState<string[]>([]);
+  const [deviceQuantityList, setDeviceQuantityList] = useState<number[]>([]);
 
   const dataParam = useMemo(
     () => ({
-      labels: dataCountryNames,
+      labels: deviceNameList,
       datasets: [
         {
-          label: "Кол-во",
-          data: dataCountryQuantity,
-          backgroundColor: bgColorRandom(dataCountryQuantity.length),
-          borderColor: ["black"],
-          borderWidth: 1,
+          label: "Устройство",
+          data: deviceQuantityList,
+          backgroundColor: "rgb(57, 241, 152)",
         },
       ],
     }),
-    [dataCountryNames, dataCountryQuantity]
+    [deviceNameList, deviceQuantityList]
   );
 
   useEffect(() => {
     if (data && data.length) {
-      const countryArr = data.map((item: visitData) => item.quantity);
-      const countryArrNames = data.map((item: visitData) => item.country);
-      setDataCountryQuantity(countryArr);
-      setDataCountryNames(countryArrNames);
+      const deviceName = data.map((item: PlatformData) => item.platform);
+      const deviceQuantity = data.map((item: PlatformData) => item.quantity);
+
+      setDeviceNameList(deviceName);
+      setDeviceQuantityList(deviceQuantity);
     }
   }, [data]);
 
   useEffect(() => {
-    setDataChar(dataParam);
-  }, [dataCountryQuantity]);
-
+    setDataChart(dataParam);
+  }, [deviceNameList, deviceQuantityList]);
   return (
     <div className={styles.largeWidgetWrapper}>
       <div className={styles.titleContainer}>
@@ -59,7 +55,7 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
           <span>За весь период</span>
         </span>
         <div className={styles.chart}>
-          {dataChar ? <CircleChart data={dataChar} /> : <div>Char</div>}
+          {dataChart && <VerticalChart data={dataChart} />}
         </div>
       </div>
 
@@ -68,17 +64,17 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
         {data ? (
           <>
             <div className={styles.headerTables}>
-              <span>Страна</span>
+              <span>Устройство</span>
               <span>Посещения</span>
             </div>
             <ul className={styles.statisticsList}>
-              {data.map((visit: visitData) => (
-                <li key={visit.country} className={styles.visitItem}>
+              {data.map((item: PlatformData) => (
+                <li key={item.platform} className={styles.visitItem}>
                   <div className={styles.visitItemWrapper}>
                     <span className={styles.itemTitle}>
-                      <TfiWorld /> {visit.country}
+                      <TfiWorld /> {item.platform}
                     </span>
-                    <span className={styles.itemQuantity}>{visit.quantity}</span>
+                    <span className={styles.itemQuantity}>{item.quantity}</span>
                   </div>
                 </li>
               ))}

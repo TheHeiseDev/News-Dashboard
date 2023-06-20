@@ -1,12 +1,12 @@
 import styles from "./AsideBar.module.scss";
-import { useLocation } from "react-router-dom";
-import { menuList } from "../../utils/constants/menuList";
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { RoleEnum } from "../../store/slice/auth/authTypes";
+
 import { FaUserCheck } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
-import { useAuth } from "../../utils/hooks/useAuth";
-import { RoleEnum } from "../../store/slice/auth/authTypes";
+import { menuList } from "../../shared/constants/menuList";
+import { useAuth } from "../../shared/hooks/useAuth";
 
 export const AsideBar = () => {
   const [activeLink, setActiveLink] = useState("");
