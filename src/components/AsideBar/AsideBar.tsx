@@ -44,7 +44,7 @@ export const AsideBar = () => {
 
   useEffect(() => {
     setActiveLink(pathname);
-  }, []);
+  }, [pathname]);
 
   return (
     <aside className={styles.asideBar}>

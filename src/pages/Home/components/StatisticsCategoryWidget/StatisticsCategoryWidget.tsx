@@ -4,15 +4,7 @@ import { VerticalChart } from "../../../../components/Charts/VerticalChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-
-type dataCategory = {
-  category: string;
-  quantity: number;
-};
-interface ICategoryWidget {
-  data: dataCategory[] | undefined;
-  title: string;
-}
+import { ICategoryWidget, dataCategory } from "./types";
 
 export const StatisticsCategoryWidget = memo(({ data, title }: ICategoryWidget) => {
   const [dataChart, setDataChart] = useState<object | null>(null);
@@ -58,11 +50,11 @@ export const StatisticsCategoryWidget = memo(({ data, title }: ICategoryWidget) 
       setDeviceNameList(deviceName);
       setDeviceQuantityList(deviceQuantity);
     }
-  }, [data]);
+  }, [data, setCategoryName]);
 
   useEffect(() => {
     setDataChart(dataParam);
-  }, [categoryNameList, categoryQuantityList]);
+  }, [dataParam]);
 
   return (
     <div className={styles.largeWidgetWrapper}>

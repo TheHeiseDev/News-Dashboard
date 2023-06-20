@@ -14,7 +14,7 @@ import managerIcon from "../../assets/images/manager.png";
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const [thisPage, setThisPage] = useState("");
   const { role } = useAuth();
@@ -50,8 +50,8 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    setThisPage(location.pathname);
-  }, []);
+    setThisPage(pathname);
+  }, [pathname]);
 
   return (
     <header className={styles.header}>

@@ -6,21 +6,21 @@ export const menuList = [
   {
     title: "Главная",
     icon: <IoHome />,
-    path: "/"
+    path: "/",
   },
   {
     title: "Статистика",
     icon: <IoStatsChart />,
-    path: "/statistics"
+    path: "/statistics",
   },
   {
     title: "Посты",
     icon: <AiFillCreditCard />,
-    path: "/posts"
+    path: "/posts",
   },
   {
     title: "Подписчики",
     icon: <MdMarkEmailUnread />,
-    path: "/subsribers"
+    path: "/subsribers",
   },
 ];

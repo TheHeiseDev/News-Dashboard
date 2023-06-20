@@ -1,12 +1,6 @@
 import styles from "./StatisticsMiniWidget.module.scss";
 import { memo } from "react";
-
-
-interface IMiniWidget {
-  data: string | number | null | undefined;
-  title: string;
-  icon: JSX.Element;
-}
+import { IMiniWidget } from "./types";
 
 export const StatisticsMiniWidget = memo(({ data, title, icon }: IMiniWidget) => {
   return (

@@ -4,16 +4,7 @@ import { CircleChart, bgColorRandom } from "../../../../components/Charts/Circle
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
-
-type visitData = {
-  country: string;
-  quantity: number;
-};
-
-interface ILargeWidget {
-  data: visitData[] | undefined;
-  title: string;
-}
+import { ILargeWidget, visitData } from "./types";
 
 export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
   const [dataChar, setDataChar] = useState<object | null>(null);
@@ -47,7 +38,7 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
 
   useEffect(() => {
     setDataChar(dataParam);
-  }, [dataCountryQuantity]);
+  }, [dataParam]);
 
   return (
     <div className={styles.largeWidgetWrapper}>
@@ -61,7 +52,6 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
           {dataChar ? <CircleChart data={dataChar} /> : <div>Char</div>}
         </div>
       </div>
-
       <div className={styles.divider}></div>
 
       <div className={styles.statisticsBlock}>
