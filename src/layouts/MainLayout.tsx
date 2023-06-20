@@ -1,8 +1,13 @@
+import styles from "./MainLayout.module.scss";
 import { AsideBar } from "../components/AsideBar/AsideBar";
 import { Header } from "../components/Header/Header";
-import styles from "./MainLayout.module.scss";
+import { FC, ReactNode } from "react";
 
-export const MainLayout = ({ children }) => {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className={styles.mainWrapper}>
       <AsideBar />

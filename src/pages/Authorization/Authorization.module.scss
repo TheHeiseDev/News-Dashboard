@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: center;
   gap: 60px;
+  padding: 0 20px;
 }
 
 .authBody {
@@ -38,77 +39,7 @@
     line-height: 1.5;
   }
 }
-.authTitle {
-}
+
 .authLogo {
   width: 300px;
-}
-.authForm {
-  margin: 0 auto;
-  width: 400px;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  & h2 {
-    margin-bottom: 20px;
-  }
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  & input {
-    height: 43px;
-    width: 100%;
-    padding: 0 10px;
-    background-color: black;
-    border-color: rgb(57 127 241);
-    border-style: solid;
-    border-width: 1px;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    margin: 0 0 20px 0;
-  }
-
-  & button {
-    background: rgb(57 127 241);
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    padding: 10px 30px;
-    transition: background-color 0.3s ease;
-    width: 100px;
-    align-self: center;
-    transition: background-color 0.3s ease;
-    &:hover {
-      background: rgb(12, 68, 159);
-    }
-  }
-
-  & .inputContainerPass {
-    position: relative;
-  }
-  & .eye {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    top: 14px;
-    right: 10px;
-    font-size: 16px;
-    opacity: 0.7;
-    cursor: pointer;
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-.error {
-  font-size: 12px;
-  color: red;
-  margin: 0 0 10px 0;
 }

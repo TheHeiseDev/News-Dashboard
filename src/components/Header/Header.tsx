@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
+import { useEffect, useState } from "react";
 import { IoHome } from "react-icons/io5";
 
 import { AiOutlinePoweroff } from "react-icons/ai";
@@ -11,14 +11,17 @@ import { RoleEnum } from "../../store/slice/auth/authTypes";
 import { clearLocalStorage } from "../../utils/saveInLocalStorage";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../store/slice/auth/authSlice";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const [thisPage, setThisPage] = useState("");
   const { role } = useAuth();
 
-  const pageName = (thisPage) => {
+  const pageName = (thisPage: string) => {
     if (thisPage === "/") return "Главная";
     if (thisPage === "/statistics") return "Статистика";
     if (thisPage === "/posts") return "Посты";
@@ -30,10 +33,11 @@ export const Header = () => {
     clearLocalStorage();
     navigate("/auth", { replace: false });
   };
+
   useEffect(() => {
-    const path = String(window.location.pathname);
-    setThisPage(path);
+    setThisPage(location.pathname);
   }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.headerWrapper}>

@@ -13,8 +13,6 @@ import * as yup from "yup";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
 
-
-
 enum ErrorCodeSignIn {
   login = "auth/user-not-found",
   password = "auth/wrong-password",
@@ -30,7 +28,6 @@ export const FormAuth = () => {
 
   const [loading, setLoading] = useState(false);
   const [viewPass, setViewPass] = useState(false);
-
 
   const validationSchema = yup.object().shape({
     email: yup.string().required("Обязательное поле").email("Некорректный email"),

@@ -1,5 +1,5 @@
 import styles from "./AsideBar.module.scss";
-
+import { useLocation } from "react-router-dom";
 import { menuList } from "../../utils/constants/menuList";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
@@ -11,8 +11,10 @@ import { RoleEnum } from "../../store/slice/auth/authTypes";
 export const AsideBar = () => {
   const [activeLink, setActiveLink] = useState("");
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { role } = useAuth();
-  const navigatePageHandle = (path) => {
+
+  const navigatePageHandle = (path: string) => {
     setActiveLink(path);
     navigate(path);
   };
@@ -41,8 +43,7 @@ export const AsideBar = () => {
   }, [role]);
 
   useEffect(() => {
-    const path = String(window.location.pathname);
-    setActiveLink(path);
+    setActiveLink(pathname);
   }, []);
 
   return (

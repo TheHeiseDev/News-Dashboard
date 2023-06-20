@@ -4,6 +4,7 @@ import { CircleChart, bgColorRandom } from "../../Charts/CircleChart";
 import { TfiWorld } from "react-icons/tfi";
 import { AiFillCheckCircle } from "react-icons/ai";
 import CircularProgress from "@mui/material/CircularProgress";
+import { ChartData } from "chart.js";
 
 type visitData = {
   country: string;
@@ -19,7 +20,6 @@ export const StatisticsLargeWidget = memo(({ data, title }: ILargeWidget) => {
   const [dataChar, setDataChar] = useState<object | null>(null);
   const [dataCountryQuantity, setDataCountryQuantity] = useState<number[]>([]);
   const [dataCountryNames, setDataCountryNames] = useState<string[]>([]);
-
 
   const dataParam = useMemo(
     () => ({

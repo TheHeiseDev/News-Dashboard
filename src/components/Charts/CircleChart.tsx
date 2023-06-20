@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function bgColorRandom(num) {
+export function bgColorRandom(num: number): string[] {
   const bgColor = [
     "rgba(255, 99, 132, 0.9)",
     "rgba(215, 120, 112, 0.9)",
@@ -32,8 +31,8 @@ export function bgColorRandom(num) {
     "rgb(247 11 118 / 71%)",
     "rgb(247 11 11 / 71%)",
   ];
-  const randomIndexes = [];
-  const result = [];
+  const randomIndexes: number[] = [];
+  const result: string[] = [];
 
   // генерируем num случайных индексов
   while (randomIndexes.length < num) {
@@ -51,27 +50,26 @@ export function bgColorRandom(num) {
   return result;
 }
 
-export function CircleChart({ data }) {
-  const chartRef = useRef(null);
-  const chart = chartRef.current;
+type CircleChartProps = {
+  data: any;
+};
+export function CircleChart({ data }: CircleChartProps) {
   const charts = {
     plugins: {
       tooltip: {
         usePointStyle: true,
         callbacks: {
-          labelPointStyle: function (context) {
-            return {
-              pointStyle: "circle",
-              rotation: 0,
-            };
-          },
+          // labelPointStyle: function (context: any) {
+          //   return {
+          //     pointStyle: "circle",
+          //     rotation: 0,
+          //   };
+          // },
         },
       },
 
       legend: {
         display: false,
-        position: "left",
-
         labels: {
           display: false,
           color: "white",

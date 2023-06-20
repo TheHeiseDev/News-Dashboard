@@ -1,5 +1,5 @@
 import {
-  Chart as ChartJS,
+  Chart,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -8,22 +8,27 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+type VerticalChartProps = {
+  data: any;
+};
 
 const options = {
   responsive: true,
   plugins: {
     legend: {
       display: false,
-      position: "top",
+      // position: "top",
     },
     title: {
       display: false,
-      text: "Устройстова",
+      text: "Устройства",
     },
   },
 };
 
-export const VerticalChart = ({ data }) => {
+export const VerticalChart = ({ data }: VerticalChartProps) => {
   return <Bar options={options} data={data} />;
 };
