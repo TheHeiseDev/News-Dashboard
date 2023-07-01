@@ -14,6 +14,7 @@ export const Routing = () => {
         <Route path="/statistics" element={<StatisticsPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/subsribers" element={<SubscribersPage />} />
+
       </Route>
       <Route path="/auth" element={<Authorization />} />
       <Route path="*" element={<Navigate to="/" />} />

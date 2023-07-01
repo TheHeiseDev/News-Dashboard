@@ -160,16 +160,3 @@
 //     os: "macOS",
 //   },
 // ];
-
-const obj = [
-  {
-    platform: "Mobile",
-    quantity: 4,
-  },
-  {
-    platform: "Desktop",
-    quantity: 18,
-  },
-];
-
-const statisticsData = obj.reduce((prev, next));

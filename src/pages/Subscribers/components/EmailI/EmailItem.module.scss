@@ -1,0 +1,29 @@
+@import "../../../../styles/libs/variables";
+
+.emailItem {
+}
+.itemWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 20px;
+  border-top: 0.0625rem solid rgb(45, 55, 72);
+
+  & .email {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  & .date {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  & .country {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+}
