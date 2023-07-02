@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../store/store";
 import { fetchUpdatePost } from "../../store/slice/posts/postsThunk";
 import { updatePost } from "../../store/slice/posts/postsSlice";
 
-const API_KEY = "3df933dde48d2a789fb9b433a05dc9b8";
 
 export const ModalEditPost = ({ setActive, post }) => {
   const dispatch = useAppDispatch();
@@ -15,6 +14,29 @@ export const ModalEditPost = ({ setActive, post }) => {
   const [link, setLink] = useState("");
   const [category, setCategory] = useState("");
 
+  useEffect(() => {
+    setTitle(post.title);
+    setDescription(post.description);
+    setCategory(post.category);
+    setLink(post.link);
+    setUploadedImageUrl(post.imageUrl);
+  }, []);
+
+  const uploadImage = async () => {
+    const image = document.querySelector('input[type="file"]').files[0];
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
+      const response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API_KEY}`,
+        formData
+      );
+      setUploadedImageUrl(response.data.data.url);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
   const savePostHandler = () => {
     const updatePostObj = {
       ...post,
@@ -28,30 +50,6 @@ export const ModalEditPost = ({ setActive, post }) => {
     dispatch(updatePost({ id: post.id, object: updatePostObj }));
     setActive(false);
   };
-
-  useEffect(() => {
-    setTitle(post.title);
-    setDescription(post.description);
-    setCategory(post.category);
-    setLink(post.link);
-    setUploadedImageUrl(post.imageUrl);
-  }, []);
-
-  async function uploadImage() {
-    const image = document.querySelector('input[type="file"]').files[0];
-    try {
-      const formData = new FormData();
-      formData.append("image", image);
-      const response = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${API_KEY}`,
-        formData
-      );
-      setUploadedImageUrl(response.data.data.url);
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
 
   return (
     <div className={styles.modal} onClick={() => setActive(false)}>
