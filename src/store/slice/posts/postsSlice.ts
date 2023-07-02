@@ -3,16 +3,23 @@ import { RootState } from "../../store";
 import { StatusEnum } from "../visit/visitTypes";
 import { PostsSlice } from "./postsTypes";
 import { fetchPosts } from "./postsThunk";
+import { PostType } from "../postsStatistics/postsStatisticsTypes";
 
 const initialState: PostsSlice = {
   posts: null,
   status: StatusEnum.loading,
 };
-export const postsStatisticsSlice = createSlice({
+export const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
-
+  reducers: {
+    updatePost: (state, action) => {
+      const { id, object } = action.payload;
+      if (state.posts) {
+        state.posts = state.posts?.map((post) => (post.id === id ? object : post));
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -30,7 +37,7 @@ export const postsStatisticsSlice = createSlice({
   },
 });
 
-// export const {} = visitSlice.actions;
-export const selectPostsStatistics = (state: RootState) => state.postsStatistics;
+export const { updatePost } = postsSlice.actions;
+export const selectPosts = (state: RootState) => state.posts;
 
-export default postsStatisticsSlice.reducer;
+export default postsSlice.reducer;

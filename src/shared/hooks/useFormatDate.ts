@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-export const useFormatDate = (post: any | undefined | null): string => {
+export const useFormatDate = (post: any | undefined | null | string): string => {
   const formattedDate = useMemo(() => {
     if (!post) return "";
 

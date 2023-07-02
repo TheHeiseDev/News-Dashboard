@@ -1,4 +1,4 @@
-import { PostType } from "../posts/postsStatisticsTypes";
+import { PostType } from "../postsStatistics/postsStatisticsTypes";
 import { StatusEnum } from "../visit/visitTypes";
 
 export type PostsSlice = {

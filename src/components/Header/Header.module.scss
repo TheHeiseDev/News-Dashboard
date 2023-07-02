@@ -2,23 +2,20 @@
 
 .header {
   margin: 0 0 20px 0;
-  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 21.125rem);
   box-sizing: border-box;
   flex-shrink: 0;
-  position: sticky;
+  position: fixed;
   z-index: 1100;
   left: auto;
-  right: 0px;
-  //   box-shadow: rgba(255, 255, 255, 0.9) 0rem 0rem 0.0625rem 0.0625rem inset,
-  //     rgba(0, 0, 0, 0.05) 0rem 1.25rem 1.6875rem 0rem;
+  right: 10px;
+  -webkit-backdrop-filter: blur(2.625rem);
   backdrop-filter: blur(2.625rem);
   color: rgb(255, 255, 255);
   top: 1.85rem;
   min-height: 4.6875rem;
   display: grid;
-  -webkit-box-align: center;
   align-items: center;
   border-radius: 1.25rem;
   padding: 0.5rem 0px;

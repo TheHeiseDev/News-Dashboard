@@ -20,6 +20,7 @@
     "dotenv": "^16.1.4",
     "firebase": "^9.22.2",
     "formik": "^2.4.2",
+    "imgbb-uploader": "^1.5.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",

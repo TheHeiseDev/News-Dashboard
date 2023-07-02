@@ -4,7 +4,7 @@ import { apiService } from "../../../api/apiService";
 import { PostType } from "./postsStatisticsTypes";
 
 export const fetchPostsStatistics = createAsyncThunk(
-  "postsStatistics/fetchPosts",
+  "postsStatistics/fetchPostsStatistics",
   async () => {
     const { data } = await axios<PostType[]>({
       method: "GET",
