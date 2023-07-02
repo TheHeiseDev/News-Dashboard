@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
 import { selectVisit } from "../../store/slice/visit/visitSlice";
 import { fetchVisit } from "../../store/slice/visit/visitThunk";
-import { selectPostsStatistics } from "../../store/slice/posts/postsStatisticsSlice";
-import { fetchPostsStatistics } from "../../store/slice/posts/postsStatisticsThunk";
+import { selectPostsStatistics } from "../../store/slice/postsStatistics/postsStatisticsSlice";
+import { fetchPostsStatistics } from "../../store/slice/postsStatistics/postsStatisticsThunk";
 import { MainLayout } from "../../layouts/MainLayout";
 
 import { StatisticsMiniWidget } from "./components/StatisticsMiniWidget/StatisticsMiniWidget";
@@ -19,7 +19,6 @@ import { AiOutlineFundView } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
 
 export const HomePage = () => {
-  
   const dispatch = useAppDispatch();
   const { visits, status } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPostsStatistics);

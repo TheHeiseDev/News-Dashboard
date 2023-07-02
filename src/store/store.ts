@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import visitSlice from "./slice/visit/visitSlice";
-import postsStatisticsSlice from "./slice/posts/postsStatisticsSlice";
 import authSlice from "./slice/auth/authSlice";
+import postsSlice from "./slice/postsStatistics/postsSlice";
+import postsStatisticsSlice from "./slice/posts/postsStatisticsSlice";
 
 export const store = configureStore({
   reducer: {
-    visit: visitSlice,
-    postsStatistics: postsStatisticsSlice,
     auth: authSlice,
+    visit: visitSlice,
+    posts: postsSlice,
+    postsStatistics: postsStatisticsSlice,
   },
 });
 

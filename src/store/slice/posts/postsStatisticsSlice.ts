@@ -3,9 +3,9 @@ import { RootState } from "../../store";
 import { StatusEnum } from "../visit/visitTypes";
 import { fetchPostsStatistics } from "./postsStatisticsThunk";
 import { getStatisticPosts } from "../../../shared/helpers/getStatisticPosts";
-import { PostsSliceInitial, Statistics } from "./postsStatisticsTypes";
+import { PostsStatisticsSlice, Statistics } from "./postsStatisticsTypes";
 
-const initialState: PostsSliceInitial = {
+const initialState: PostsStatisticsSlice = {
   postsStatistics: null,
   status: StatusEnum.loading,
 };

@@ -1,6 +1,6 @@
 import { StatusEnum } from "../visit/visitTypes";
 
-export type PostsSliceInitial = {
+export type PostsStatisticsSlice = {
   postsStatistics: Statistics | null;
   status: StatusEnum;
 };

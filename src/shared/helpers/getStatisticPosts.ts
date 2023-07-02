@@ -5,7 +5,7 @@ import {
   LikesByCountry,
   PostType,
   Statistics,
-} from "../../store/slice/posts/postsStatisticsTypes";
+} from "../../store/slice/postsStatistics/postsStatisticsTypes";
 
 interface ILikesStatistics {
   quantityLikes: number;
