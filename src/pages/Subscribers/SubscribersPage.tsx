@@ -7,93 +7,93 @@ export const SubscribersPage = () => {
   const emailData = [
     {
       id: 1,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 2,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 3,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 4,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 5,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 6,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 7,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 8,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 9,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 10,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 11,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 12,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 13,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 14,
-      email: "e_varderesyan@mail.ru",
+      email: "template@gmail.com",
       date: "12.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
     {
       id: 15,
-      email: "gagans@gmail.com",
+      email: "template@gmail.com",
       date: "14.05.2023",
-      country: "Keiv",
+      country: "Germany",
     },
   ];
 
@@ -124,13 +124,8 @@ export const SubscribersPage = () => {
           </div>
           <ul className={styles.subsribersList}>
             {emailData.map((item) => (
-              <li className={styles.subsribeItem}>
-                <EmailItem
-                  key={item.id}
-                  email={item.email}
-                  date={item.date}
-                  country={item.country}
-                />
+              <li key={item.id} className={styles.subsribeItem}>
+                <EmailItem email={item.email} date={item.date} country={item.country} />
               </li>
             ))}
           </ul>
