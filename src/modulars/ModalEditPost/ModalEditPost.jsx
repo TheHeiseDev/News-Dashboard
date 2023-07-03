@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../store/store";
 import { fetchUpdatePost } from "../../store/slice/posts/postsThunk";
 import { updatePost } from "../../store/slice/posts/postsSlice";
 
-
 export const ModalEditPost = ({ setActive, post }) => {
   const dispatch = useAppDispatch();
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
