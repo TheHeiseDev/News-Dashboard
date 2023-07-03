@@ -78,7 +78,7 @@ export const FormAuth = () => {
           role:
             user.email === process.env.REACT_APP_ADMIN_EMAIL
               ? RoleEnum.admin
-              : RoleEnum.manager || null,
+              : RoleEnum.editor || null,
         };
 
         //Store authorization data in localStorage

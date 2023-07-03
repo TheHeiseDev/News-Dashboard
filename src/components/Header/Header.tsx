@@ -40,8 +40,8 @@ export const Header = () => {
       if (role === RoleEnum.admin) {
         return "Администратор";
       }
-      if (role === RoleEnum.manager) {
-        return "Менеджер";
+      if (role === RoleEnum.editor) {
+        return "Редактор";
       }
       return "";
     }, [role]);
@@ -76,7 +76,7 @@ export const Header = () => {
                   src={
                     role === RoleEnum.admin
                       ? adminIcon
-                      : role === RoleEnum.manager
+                      : role === RoleEnum.editor
                       ? managerIcon
                       : ""
                   }

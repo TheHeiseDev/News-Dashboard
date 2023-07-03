@@ -69,6 +69,9 @@
   }
   & textarea {
     min-height: 120px;
+    @media (min-width: 1600px) {
+      min-height: 200px;
+    }
   }
 }
 

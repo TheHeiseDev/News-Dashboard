@@ -27,9 +27,9 @@ export const AsideBar = () => {
           access: "Полный доступ",
         };
       }
-      if (role === RoleEnum.manager) {
+      if (role === RoleEnum.editor) {
         return {
-          role: "Менеджер",
+          role: "Редактор",
           access: "Ограниченный",
         };
       } else {

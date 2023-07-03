@@ -4,7 +4,7 @@ export interface IAuthSlice {
 }
 export enum RoleEnum {
   admin = "admin",
-  manager = "manager",
+  editor = "editor",
 }
 export type UserType = {
   id: string | null;

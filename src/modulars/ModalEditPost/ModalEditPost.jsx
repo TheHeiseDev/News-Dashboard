@@ -21,6 +21,19 @@ export const ModalEditPost = ({ setActive, post }) => {
     setUploadedImageUrl(post.imageUrl);
   }, []);
 
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.keyCode === 27) {
+        setActive(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
   const uploadImage = async () => {
     const image = document.querySelector('input[type="file"]').files[0];
     try {

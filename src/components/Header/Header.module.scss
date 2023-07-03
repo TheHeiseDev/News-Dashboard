@@ -1,9 +1,8 @@
 @import "../../styles/libs/variables";
 
 .header {
-  margin: 0 0 20px 0;
   flex-direction: column;
-  width: calc(100% - 21.125rem);
+  width: calc(100% - 21.125rem - 15px);
   box-sizing: border-box;
   flex-shrink: 0;
   position: fixed;
@@ -14,7 +13,6 @@
   backdrop-filter: blur(2.625rem);
   color: rgb(255, 255, 255);
   top: 1.85rem;
-  min-height: 4.6875rem;
   display: grid;
   align-items: center;
   border-radius: 1.25rem;
@@ -45,7 +43,9 @@
     font-size: 14px;
     color: gray;
   }
-
+  & h6 {
+    font-size: 1.3vw;
+  }
   div svg {
     fill: gray;
     width: 16px;
@@ -77,7 +77,7 @@
       display: flex;
       cursor: pointer;
       & img {
-        width: 25px;
+        width: 1.2vw;
       }
       & .online {
         position: absolute;
@@ -103,7 +103,7 @@
     & .authSignUp {
       display: flex;
       cursor: pointer;
-      font-size: 25px;
+      font-size: 1.2vw;
       &:hover {
         color: $mainColor;
       }
