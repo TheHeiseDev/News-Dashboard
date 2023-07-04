@@ -19,7 +19,8 @@ export enum CategoryEnum {
 }
 
 export const Post = ({ post }: IPost) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+
 
   const formatDate = (dateString: any) => {
     const date = new Date(dateString);
@@ -44,12 +45,12 @@ export const Post = ({ post }: IPost) => {
     }
   };
   const postEditHandle = () => {
-    setIsOpen(true);
+    setIsOpenEdit(true);
   };
 
   return (
     <div className={styles.post}>
-      {isOpen && <ModalEditPost setActive={setIsOpen} post={post} />}
+      {isOpenEdit && <ModalEditPost setActive={setIsOpenEdit} post={post} />}
 
       <div className={styles.postWrapper}>
         <div className={styles.postImage}>

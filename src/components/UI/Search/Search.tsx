@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useCallback, useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "./Search.module.scss";
-import { debounce } from "../../shared/helpers/debounce";
-import { useAppDispatch } from "../../store/store";
+import { debounce } from "../../../shared/helpers/debounce";
+import { useAppDispatch } from "../../../store/store";
 import { FiX } from "react-icons/fi";
-import { fetchPosts } from "../../store/slice/posts/postsThunk";
+import { fetchPosts } from "../../../store/slice/posts/postsThunk";
 
 interface ISearch {
   searchValue: string;
@@ -20,7 +20,7 @@ export const Search = React.memo(({ searchValue, setSearchValue }: ISearch) => {
   const updateSearchValue = useCallback(
     debounce((str: string) => {
       if (str !== " " && str !== "  ") {
-        dispatch(fetchPosts({ searchValue: str }));
+        dispatch(fetchPosts({ searchValue: str, sortBy: "date", order: "desc" }));
       }
     }, 1000),
     []

@@ -20,7 +20,7 @@ import { FaComments } from "react-icons/fa";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
-  const { visits, status } = useSelector(selectVisit);
+  const { visits } = useSelector(selectVisit);
   const { postsStatistics } = useSelector(selectPostsStatistics);
 
   // The first time you visit the site, you retrieve data from the server.
@@ -33,6 +33,7 @@ export const HomePage = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchVisitAndPosts();
   }, [fetchVisitAndPosts]);
 

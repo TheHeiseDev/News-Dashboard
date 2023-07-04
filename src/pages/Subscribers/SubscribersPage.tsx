@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
 import styles from "./SubscribersPage.module.scss";
 import { EmailItem } from "./components/EmailI/EmailItem";
@@ -96,6 +97,10 @@ export const SubscribersPage = () => {
       country: "Germany",
     },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const downloadEmails = () => {
     const emails = emailData.map((item) => item.email).join("\n");

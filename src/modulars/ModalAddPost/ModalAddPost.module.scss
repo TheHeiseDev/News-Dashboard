@@ -29,6 +29,8 @@
   padding: 0px 20px 0px 20px;
 
   & img {
+    min-height: 250px;
+    max-height: 280px;
     height: 250px;
     width: 100%;
     @media (min-width: 1920px) {
@@ -42,6 +44,15 @@
     justify-content: space-between;
   }
 }
+.imageSkeleton {
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  font-size: 3vw;
+}
+
 .inputsContainer {
   display: flex;
   flex-direction: column;

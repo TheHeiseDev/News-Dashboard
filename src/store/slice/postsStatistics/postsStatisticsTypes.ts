@@ -11,11 +11,13 @@ export type PostType = {
   imageUrl: string;
   views: number;
   comments: CommentsType[];
-  date: number;
+  date: string;
   likes: LikesType[];
   category: string;
   link: string;
 };
+export type PostTypeWithoutId = Omit<PostType, "id">;
+
 export type CommentsType = {
   id: string;
   userName: string;

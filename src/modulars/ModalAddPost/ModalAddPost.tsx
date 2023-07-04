@@ -2,15 +2,20 @@ import styles from "./ModalAddPost.module.scss";
 import { useEffect, useState, useRef, ChangeEvent } from "react";
 import axios from "axios";
 import { useAppDispatch } from "../../store/store";
-import { PostType } from "../../store/slice/postsStatistics/postsStatisticsTypes";
+import {
+  PostType,
+  PostTypeWithoutId,
+} from "../../store/slice/postsStatistics/postsStatisticsTypes";
 import { ImCloudCheck } from "react-icons/im";
+import { MdOutlineAddAPhoto } from "react-icons/md";
+import { fetchAddPost } from "../../store/slice/posts/postsThunk";
+import { getCurrentDateTime } from "../../shared/helpers/getCurrentDateTime";
 
-interface IMModalAddPost {
+interface IModalAddPost {
   setActive: (toogle: boolean) => void;
-  post: PostType;
 }
 
-export const ModalEditPost = ({ setActive, post }: IMModalAddPost) => {
+export const ModalAddPost = ({ setActive }: IModalAddPost) => {
   const dispatch = useAppDispatch();
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [title, setTitle] = useState("");
@@ -54,7 +59,20 @@ export const ModalEditPost = ({ setActive, post }: IMModalAddPost) => {
   };
 
   const addPostHandler = () => {
-    setActive(false);
+    const newPost: PostTypeWithoutId = {
+      title: title,
+      description: description,
+      imageUrl: uploadedImageUrl,
+      views: 0,
+      comments: [],
+      date: getCurrentDateTime(),
+      likes: [],
+      category: category,
+      link: link,
+    };
+    if (uploadedImageUrl && title && description && category) {
+      dispatch(fetchAddPost(newPost)).then(() => setActive(false));
+    }
   };
 
   const typeFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +87,13 @@ export const ModalEditPost = ({ setActive, post }: IMModalAddPost) => {
     <div className={styles.modal} onClick={() => setActive(false)}>
       <div className={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
         <div className={styles.imageContainer}>
-          <img src={uploadedImageUrl} alt="picture" />
+          {uploadedImageUrl ? (
+            <img src={uploadedImageUrl} alt="picture" />
+          ) : (
+            <div className={styles.imageSkeleton}>
+              <MdOutlineAddAPhoto />
+            </div>
+          )}
 
           <div className={styles.imageActions}>
             <input

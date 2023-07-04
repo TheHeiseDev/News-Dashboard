@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiService } from "../../../api/apiService";
-import { PostType } from "../postsStatistics/postsStatisticsTypes";
+import { PostType, PostTypeWithoutId } from "../postsStatistics/postsStatisticsTypes";
 
 type ParamsType = {
   searchValue?: string;
+  sortBy?: string;
+  order?: string;
 };
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
@@ -14,6 +16,8 @@ export const fetchPosts = createAsyncThunk(
       url: apiService.baseUrl,
       params: {
         search: params?.searchValue,
+        sortBy: params?.sortBy,
+        order: params?.order,
       },
     });
 
@@ -29,6 +33,19 @@ export const fetchUpdatePost = createAsyncThunk(
   "posts/fetchUpdatePost",
   async ({ id, object }: UpdatePostParams) => {
     const { data } = await axios.put(`${apiService.baseUrl}/${id}`, object);
+
+    return data;
+  }
+);
+
+export const fetchAddPost = createAsyncThunk(
+  "posts/fetchAddPost",
+  async (post: PostTypeWithoutId) => {
+    const { data } = await axios<PostType>({
+      method: "POST",
+      url: apiService.baseUrl,
+      data: post,
+    });
 
     return data;
   }

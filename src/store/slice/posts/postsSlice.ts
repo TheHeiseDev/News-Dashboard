@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { StatusEnum } from "../visit/visitTypes";
 import { PostsSlice } from "./postsTypes";
-import { fetchPosts } from "./postsThunk";
+import { fetchAddPost, fetchPosts } from "./postsThunk";
 import { PostType } from "../postsStatistics/postsStatisticsTypes";
 
 const initialState: PostsSlice = {
@@ -33,6 +33,15 @@ export const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state) => {
         state.posts = null;
         state.status = StatusEnum.error;
+      })
+      .addCase(fetchAddPost.pending, (state) => {})
+      .addCase(fetchAddPost.fulfilled, (state, action) => {
+        if (state.posts) {
+          state.posts.unshift(action.payload);
+        }
+      })
+      .addCase(fetchAddPost.rejected, (state) => {
+        console.log("error add post");
       });
   },
 });
