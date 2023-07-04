@@ -1,17 +1,26 @@
-import axios from "axios";
 import styles from "./ModalEditPost.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, ChangeEvent } from "react";
 import { useAppDispatch } from "../../store/store";
 import { fetchUpdatePost } from "../../store/slice/posts/postsThunk";
 import { updatePost } from "../../store/slice/posts/postsSlice";
+import { PostType } from "../../store/slice/postsStatistics/postsStatisticsTypes";
+import axios from "axios";
+import { ImCloudCheck } from "react-icons/im";
 
-export const ModalEditPost = ({ setActive, post }) => {
+interface IMModalEditPost {
+  setActive: (toogle: boolean) => void;
+  post: PostType;
+}
+
+export const ModalEditPost = ({ setActive, post }: IMModalEditPost) => {
   const dispatch = useAppDispatch();
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [category, setCategory] = useState("");
+  const imageRef = useRef<any>(null);
+  const [isUpload, setIsUpload] = useState(false);
 
   useEffect(() => {
     setTitle(post.title);
@@ -22,7 +31,7 @@ export const ModalEditPost = ({ setActive, post }) => {
   }, []);
 
   useEffect(() => {
-    const handleKeyPress = (event) => {
+    const handleKeyPress = (event: KeyboardEvent) => {
       if (event.keyCode === 27) {
         setActive(false);
       }
@@ -35,22 +44,27 @@ export const ModalEditPost = ({ setActive, post }) => {
   }, []);
 
   const uploadImage = async () => {
-    const image = document.querySelector('input[type="file"]').files[0];
+    const image = imageRef.current.files[0];
     try {
       const formData = new FormData();
-      formData.append("image", image);
+
+      if (image) {
+        formData.append("image", image);
+      }
+
       const response = await axios.post(
         `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API_KEY}`,
+
         formData
       );
       setUploadedImageUrl(response.data.data.url);
     } catch (error) {
       console.error(error);
-      return null;
     }
   };
+
   const savePostHandler = () => {
-    const updatePostObj = {
+    const updatePostObj: PostType = {
       ...post,
       title: title,
       description: description,
@@ -63,6 +77,14 @@ export const ModalEditPost = ({ setActive, post }) => {
     setActive(false);
   };
 
+  const typeFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setIsUpload(true);
+    } else {
+      setIsUpload(false);
+    }
+  };
+
   return (
     <div className={styles.modal} onClick={() => setActive(false)}>
       <div className={styles.modalContainer} onClick={(e) => e.stopPropagation()}>
@@ -70,9 +92,19 @@ export const ModalEditPost = ({ setActive, post }) => {
           <img src={uploadedImageUrl} alt="picture" />
 
           <div className={styles.imageActions}>
-            <input placeholder="Загрузить" type="file" />
-            <button className={styles.btn} onClick={uploadImage}>
+            <input
+              ref={imageRef}
+              onChange={typeFileHandler}
+              placeholder="Загрузить"
+              type="file"
+            />
+
+            <button
+              className={`${styles.btn} ${!isUpload ? styles.active : ""}`}
+              onClick={uploadImage}
+            >
               Загрузить
+              <ImCloudCheck />
             </button>
           </div>
         </div>
@@ -86,7 +118,6 @@ export const ModalEditPost = ({ setActive, post }) => {
           />
           <textarea
             placeholder="Описание"
-            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />

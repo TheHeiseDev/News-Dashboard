@@ -1,3 +1,4 @@
+@import "../../styles/libs/variables";
 .page {
   height: calc(100vh - 100px);
   margin-top: 50px;
@@ -7,4 +8,36 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.postPageActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 20px 0;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5vw;
+
+  & svg {
+    fill: $mainColor;
+  }
+}
+
+.searchContainer {
+  width: 100%;
+  margin: 0 40px;
+}
+
+.postsCount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-wrap: nowrap;
 }
