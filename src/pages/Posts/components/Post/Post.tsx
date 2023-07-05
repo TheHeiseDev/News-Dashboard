@@ -7,6 +7,8 @@ import { HiPencil } from "react-icons/hi";
 import ClassIcon from "@mui/icons-material/Class";
 import { ModalEditPost } from "../../../../modulars/ModalEditPost/ModalEditPost";
 import { useState } from "react";
+import { useAuth } from "../../../../shared/hooks/useAuth";
+import { RoleEnum } from "../../../../store/slice/auth/authTypes";
 
 interface IPost {
   post: PostType;
@@ -20,7 +22,7 @@ export enum CategoryEnum {
 
 export const Post = ({ post }: IPost) => {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
-
+  const { role } = useAuth();
 
   const formatDate = (dateString: any) => {
     const date = new Date(dateString);
@@ -71,9 +73,13 @@ export const Post = ({ post }: IPost) => {
             <Button callback={postEditHandle}>
               Изменить <HiPencil />
             </Button>
-            <Button callback={() => {}}>
+          {
+             role === RoleEnum.admin && (
+              <Button callback={() => {}}>
               Удалить <AiFillDelete />
             </Button>
+             )
+          }
           </div>
         </div>
       </div>

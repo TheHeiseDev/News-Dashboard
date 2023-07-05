@@ -2,13 +2,11 @@ import styles from "./ModalAddPost.module.scss";
 import { useEffect, useState, useRef, ChangeEvent } from "react";
 import axios from "axios";
 import { useAppDispatch } from "../../store/store";
-import {
-  PostType,
-  PostTypeWithoutId,
+import { fetchAddPost } from "../../store/slice/posts/postsThunk";
+import {PostTypeWithoutId,
 } from "../../store/slice/postsStatistics/postsStatisticsTypes";
 import { ImCloudCheck } from "react-icons/im";
 import { MdOutlineAddAPhoto } from "react-icons/md";
-import { fetchAddPost } from "../../store/slice/posts/postsThunk";
 import { getCurrentDateTime } from "../../shared/helpers/getCurrentDateTime";
 
 interface IModalAddPost {
@@ -17,11 +15,11 @@ interface IModalAddPost {
 
 export const ModalAddPost = ({ setActive }: IModalAddPost) => {
   const dispatch = useAppDispatch();
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [link, setLink] = useState("");
   const [category, setCategory] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [link, setLink] = useState("");
   const imageRef = useRef<any>(null);
   const [isUpload, setIsUpload] = useState(false);
 
