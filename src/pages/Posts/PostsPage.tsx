@@ -12,10 +12,12 @@ import { FiFolder } from "react-icons/fi";
 import { FiTrendingUp } from "react-icons/fi";
 import { MdPostAdd } from "react-icons/md";
 import { ModalAddPost } from "../../modulars/ModalAddPost/ModalAddPost";
+import { StatusEnum } from "../../store/slice/visit/visitTypes";
+import { CircularProgress } from "@mui/material";
 
 export const PostsPage = () => {
   const dispatch = useAppDispatch();
-  const { posts } = useSelector(selectPosts);
+  const { posts, status } = useSelector(selectPosts);
   const [searchValue, setSearchValue] = useState("");
   const [isOpenAdd, setIsOpenAdd] = useState(false);
 
@@ -43,7 +45,11 @@ export const PostsPage = () => {
               <FiTrendingUp /> <span>Кол-во постов: {posts?.length}</span>
             </div>
           </div>
-          {posts?.length ? (
+          {status === StatusEnum.loading ? (
+            <div className={styles.loadingContainer}>
+              <CircularProgress />
+            </div>
+          ) : posts?.length ? (
             posts.map((post: PostType) => <Post key={post.id} post={post} />)
           ) : (
             <h1>Нет постов</h1>
