@@ -5,6 +5,7 @@ import authSlice from "./slice/auth/authSlice";
 import visitSlice from "./slice/visit/visitSlice";
 import postsSlice from "./slice/posts/postsSlice";
 import postsStatisticsSlice from "./slice/postsStatistics/postsStatisticsSlice";
+import emailSlice from "./slice/email/emailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     visit: visitSlice,
     posts: postsSlice,
     postsStatistics: postsStatisticsSlice,
+    email: emailSlice
   },
 });
 

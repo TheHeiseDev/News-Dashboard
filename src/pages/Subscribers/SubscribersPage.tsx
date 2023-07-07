@@ -1,117 +1,41 @@
-import { useEffect } from "react";
-import { MainLayout } from "../../layouts/MainLayout";
 import styles from "./SubscribersPage.module.scss";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { useAppDispatch } from "../../store/store";
+import { fetchSubscribers } from "../../store/slice/email/emailThunk";
+import { selectEmails } from "../../store/slice/email/emailSlice";
+import { Email } from "../../store/slice/email/emailTypes";
+import { StatusEnum } from "../../store/slice/visit/visitTypes";
+
+import { MainLayout } from "../../layouts/MainLayout";
 import { EmailItem } from "./components/EmailI/EmailItem";
 import { AiOutlineCloudDownload } from "react-icons/ai";
+import { CircularProgress } from "@mui/material";
+import { formatDate } from "../../shared/helpers/formatDate";
 
 export const SubscribersPage = () => {
-  const emailData = [
-    {
-      id: 1,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 2,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 3,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 4,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 5,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 6,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 7,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 8,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 9,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 10,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 11,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 12,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 13,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 14,
-      email: "template@gmail.com",
-      date: "12.05.2023",
-      country: "Germany",
-    },
-    {
-      id: 15,
-      email: "template@gmail.com",
-      date: "14.05.2023",
-      country: "Germany",
-    },
-  ];
+  const dispatch = useAppDispatch();
+  const { email, status } = useSelector(selectEmails);
+
+  useEffect(() => {
+    dispatch(fetchSubscribers());
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const downloadEmails = () => {
-    const emails = emailData.map((item) => item.email).join("\n");
-    const element = document.createElement("a");
-    const file = new Blob([emails], { type: "text/plain" });
-
-    element.href = URL.createObjectURL(file);
-    element.download = `subsribers.txt`;
-    element.click();
-
-    URL.revokeObjectURL(element.href);
+    if (email) {
+      const emails = email.map((item: Email) => item.email).join("\n");
+      const element = document.createElement("a");
+      const file = new Blob([emails], { type: "text/plain" });
+      element.href = URL.createObjectURL(file);
+      element.download = `subsribers.txt`;
+      element.click();
+      URL.revokeObjectURL(element.href);
+    }
   };
 
   return (
@@ -127,13 +51,28 @@ export const SubscribersPage = () => {
               <AiOutlineCloudDownload />
             </div>
           </div>
-          <ul className={styles.subsribersList}>
-            {emailData.map((item) => (
-              <li key={item.id} className={styles.subsribeItem}>
-                <EmailItem email={item.email} date={item.date} country={item.country} />
-              </li>
-            ))}
-          </ul>
+          {status === StatusEnum.error && (
+            <div className={styles.errorContainer}>
+              Ошибка при получении данных из сервера
+            </div>
+          )}
+          {status === StatusEnum.loading ? (
+            <div className={styles.loadingContainer}>
+              <CircularProgress />
+            </div>
+          ) : (
+            <ul className={styles.subsribersList}>
+              {email?.map((item: Email) => (
+                <li key={item.id} className={styles.subsribeItem}>
+                  <EmailItem
+                    email={item.email}
+                    date={formatDate(item.date)}
+                    country={item.country}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </MainLayout>

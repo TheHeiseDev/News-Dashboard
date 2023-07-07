@@ -59,12 +59,6 @@ export function CircleChart({ data }: CircleChartProps) {
       tooltip: {
         usePointStyle: true,
         callbacks: {
-          // labelPointStyle: function (context: any) {
-          //   return {
-          //     pointStyle: "circle",
-          //     rotation: 0,
-          //   };
-          // },
         },
       },
 
