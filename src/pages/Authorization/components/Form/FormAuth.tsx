@@ -6,7 +6,7 @@ import { selectError, setError, setUser } from "../../../../store/slice/auth/aut
 import { RoleEnum } from "../../../../store/slice/auth/authTypes";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../../../../shared/hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
 import { saveInLocalStorage } from "../../../../shared/helpers/saveInLocalStorage";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";

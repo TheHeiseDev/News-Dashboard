@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectAuth } from "../../store/slice/auth/authSlice";
+import { selectAuth } from "../store/slice/auth/authSlice";
 
 export const useAuth = () => {
   const { user } = useSelector(selectAuth);

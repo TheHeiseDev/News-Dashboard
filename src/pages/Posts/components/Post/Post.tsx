@@ -7,17 +7,12 @@ import { HiPencil } from "react-icons/hi";
 import ClassIcon from "@mui/icons-material/Class";
 import { ModalEditPost } from "../../../../modulars/ModalEditPost/ModalEditPost";
 import { useState } from "react";
-import { useAuth } from "../../../../shared/hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
 import { RoleEnum } from "../../../../store/slice/auth/authTypes";
+import { setCategoryName } from "../../../../shared/helpers/setCategoryName";
 
 interface IPost {
   post: PostType;
-}
-export enum CategoryEnum {
-  it_news = "it_news",
-  ai = "ai",
-  useful_services = "useful_services",
-  courses = "courses",
 }
 
 export const Post = ({ post }: IPost) => {
@@ -32,20 +27,7 @@ export const Post = ({ post }: IPost) => {
 
     return `${month}.${day}.${year}`;
   };
-  const setCategoryName = (categoryValue: string) => {
-    if (categoryValue === CategoryEnum.it_news) {
-      return "Новости ИТ";
-    }
-    if (categoryValue === CategoryEnum.ai) {
-      return "AI";
-    }
-    if (categoryValue === CategoryEnum.useful_services) {
-      return "Полезные ресуры";
-    }
-    if (categoryValue === CategoryEnum.courses) {
-      return "Курсы";
-    }
-  };
+
   const postEditHandle = () => {
     setIsOpenEdit(true);
   };
@@ -73,13 +55,11 @@ export const Post = ({ post }: IPost) => {
             <Button callback={postEditHandle}>
               Изменить <HiPencil />
             </Button>
-          {
-             role === RoleEnum.admin && (
+            {role === RoleEnum.admin && (
               <Button callback={() => {}}>
-              Удалить <AiFillDelete />
-            </Button>
-             )
-          }
+                Удалить <AiFillDelete />
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { RoleEnum } from "../../store/slice/auth/authTypes";
 import { FaUserCheck } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
 import { menuList } from "../../shared/constants/menuList";
-import { useAuth } from "../../shared/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
 export const AsideBar = () => {
   const [activeLink, setActiveLink] = useState("");

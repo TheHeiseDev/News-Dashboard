@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RoleEnum } from "../../store/slice/auth/authTypes";
 import { removeUser } from "../../store/slice/auth/authSlice";
-import { useAuth } from "../../shared/hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { clearLocalStorage } from "../../shared/helpers/saveInLocalStorage";
 import { IoHome } from "react-icons/io5";
 import { AiOutlinePoweroff } from "react-icons/ai";
