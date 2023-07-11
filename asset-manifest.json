@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/News-Dashboard/static/css/main.579ab905.css",
+    "main.js": "/News-Dashboard/static/js/main.49ac7dc0.js",
+    "static/media/ai_animate3.gif": "/News-Dashboard/static/media/ai_animate3.a1e26685c62b74e94930.gif",
+    "static/media/Montserrat-VariableFont_wght.ttf": "/News-Dashboard/static/media/Montserrat-VariableFont_wght.3faa3eef13649db02044.ttf",
+    "static/media/manager.png": "/News-Dashboard/static/media/manager.c2881ee13982b519b393.png",
+    "static/media/admin.png": "/News-Dashboard/static/media/admin.de5ee943596fe1b92119.png",
+    "index.html": "/News-Dashboard/index.html",
+    "main.579ab905.css.map": "/News-Dashboard/static/css/main.579ab905.css.map",
+    "main.49ac7dc0.js.map": "/News-Dashboard/static/js/main.49ac7dc0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.579ab905.css",
+    "static/js/main.49ac7dc0.js"
+  ]
+}
