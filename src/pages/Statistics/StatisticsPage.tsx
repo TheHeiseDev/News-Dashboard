@@ -1,5 +1,5 @@
 import styles from "./StatisticsPage.module.scss";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/store";
 import { selectPosts } from "../../store/slice/posts/postsSlice";
@@ -14,24 +14,28 @@ export const StatisticsPage = () => {
   const dispatch = useAppDispatch();
   const { posts, status } = useSelector(selectPosts);
 
+useEffect(()=> {
+window.scrollTo(0,0)
+},[])
+
   useEffect(() => {
     if (!posts) {
       dispatch(fetchPosts({}));
     }
   }, [posts]);
 
-  const getMostLikedPosts = useCallback((posts: PostType[]) => {
+  const getMostLikedPosts = (posts: PostType[]) => {
     if (!posts?.length) return [];
 
     const sortedPosts = [...posts].sort((a, b) => b.likes.length - a.likes.length);
     return sortedPosts.slice(0, 5);
-  }, []);
+  };
 
-  const getMostDiscussedPosts = useCallback((posts: PostType[] | null) => {
+  const getMostDiscussedPosts = (posts: PostType[] | null) => {
     if (!posts?.length) return [];
     const sortedPosts = [...posts].sort((a, b) => b.comments.length - a.comments.length);
     return sortedPosts.slice(0, 5);
-  }, []);
+  };
 
   if (!posts) {
     return (

@@ -2,6 +2,7 @@
   "name": "blog_dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://theheisedev.github.io/News-Dashboard",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -20,6 +21,7 @@
     "dotenv": "^16.1.4",
     "firebase": "^9.22.2",
     "formik": "^2.4.2",
+    "gh-pages": "^5.0.0",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -37,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
