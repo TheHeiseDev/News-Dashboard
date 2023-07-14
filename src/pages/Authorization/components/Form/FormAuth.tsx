@@ -100,8 +100,8 @@ export const FormAuth = () => {
       <Formik
         validationSchema={validationSchema}
         initialValues={{
-          email: "",
-          password: "",
+          email: "manager@gmail.com",
+          password: "manager123@",
         }}
         onSubmit={handleLogin}
       >

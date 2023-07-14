@@ -109,3 +109,14 @@
   pointer-events: none;
   opacity: 0.5;
 }
+
+.saveBlock {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.roleError {
+  font-size: 0.7vw;
+  color: red;
+}

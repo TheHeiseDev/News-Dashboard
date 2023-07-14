@@ -6,6 +6,8 @@ import { updatePost } from "../../store/slice/posts/postsSlice";
 import { PostType } from "../../store/slice/postsStatistics/postsStatisticsTypes";
 import axios from "axios";
 import { ImCloudCheck } from "react-icons/im";
+import { useAuth } from "../../hooks/useAuth";
+import { RoleEnum } from "../../store/slice/auth/authTypes";
 
 interface IMModalEditPost {
   setActive: (toogle: boolean) => void;
@@ -21,6 +23,9 @@ export const ModalEditPost = ({ setActive, post }: IMModalEditPost) => {
   const [category, setCategory] = useState("");
   const imageRef = useRef<any>(null);
   const [isUpload, setIsUpload] = useState(false);
+
+  const { role } = useAuth();
+  const [roleError, setRoleError] = useState(false);
 
   useEffect(() => {
     setTitle(post.title);
@@ -64,6 +69,11 @@ export const ModalEditPost = ({ setActive, post }: IMModalEditPost) => {
   };
 
   const savePostHandler = () => {
+    if (role !== RoleEnum.admin) {
+      setRoleError(true);
+      return null;
+    }
+
     const updatePostObj: PostType = {
       ...post,
       title: title,
@@ -78,6 +88,10 @@ export const ModalEditPost = ({ setActive, post }: IMModalEditPost) => {
   };
 
   const typeFileHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (role !== RoleEnum.admin) {
+      setRoleError(true);
+      return null;
+    }
     if (event.target.files) {
       setIsUpload(true);
     } else {
@@ -135,9 +149,14 @@ export const ModalEditPost = ({ setActive, post }: IMModalEditPost) => {
           />
         </div>
 
-        <button className={styles.btn} onClick={savePostHandler}>
-          Сохранить
-        </button>
+        <div className={styles.saveBlock}>
+          <button className={styles.btn} onClick={savePostHandler}>
+            Сохранить
+          </button>
+          {roleError && (
+            <span className={styles.roleError}>Требуются права администратора</span>
+          )}
+        </div>
       </div>
     </div>
   );
